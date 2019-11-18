@@ -145,7 +145,7 @@ void Cliente::crearItinerario(int num, int idUltimo, UTM min, UTM max) {
      rutas.push_back(Itinerario(fecha,inicio,fin,acceso->GetIdUltimo(),min,m));
  };
  
- void Cliente::terminarTrayecto(){ //ToDo: adaptar para porcentaje bateria, Pra04
+ void Cliente::terminarTrayecto(){ 
      list<Itinerario>::iterator i=rutas.end();
      i--;
         i->GetVehiculo()->seDesactiva();  //bloquea la moto y la desvincula del cliente

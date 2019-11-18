@@ -50,10 +50,10 @@ int main(){
 
              
              //4) Localizar las motos sin batería e indicar si la moto utilizada está en esa situación.
-             vector<Moto> v=eco.localizaMotosSinBateria();             
-             vector<Moto>::iterator itMoto=v.begin();
+             vector<Moto*> v=eco.localizaMotosSinBateria();             
+             vector<Moto*>::iterator itMoto=v.begin();
              while (itMoto!=v.end()){
-                 if ((itMoto)->getId()==m->getId()){
+                 if ((*(itMoto))->getId() == m->getId()){
                      cout << "la moto Utilizada quedo sin bateria"<<endl;
                      break;
                  }

@@ -148,7 +148,7 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
                 }              
                 getline(fe, linea);     //Toma una línea del fichero
             }
-            //ToDo: num itinerarios aleatorios
+            
             int numItiAlt= 1+rand()%10;
             crearItinerarios(numItiAlt,UTM(minLat,minLon),UTM(maxLat,maxLon));
         }else{
@@ -332,11 +332,11 @@ bool EcoCityMoto::eliminarCliente(std::string borrameid) {
     return clientes.erase(borrameid);
 }
 
-vector<Moto> EcoCityMoto::localizaMotosSinBateria() {
-    vector<Moto> vecMotos;
+vector<Moto*> EcoCityMoto::localizaMotosSinBateria() {
+    vector<Moto*> vecMotos;
         for (int i=0; i<motos.size(); i++)
             if (motos[i].getPorcentajeBateria()<15)
-                vecMotos.push_back(motos[i]);
+                vecMotos.push_back(&motos[i]);
         return vecMotos;
 }
 
