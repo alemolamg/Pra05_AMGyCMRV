@@ -36,7 +36,7 @@ public:
     unsigned GetIdUltimo() const;
     void SetIdUltimo(unsigned nuevoIdUltimo);
     
-    vector<Moto> localizaMotosSinBateria();
+    vector<Moto*> localizaMotosSinBateria();
     Moto* LocMotoCercana(UTM &ubicacion);
     void desbloqueaMoto(Moto *moto, Cliente *cli);   
     
