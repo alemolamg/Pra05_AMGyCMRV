@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/EcoCityMoto.o \
 	${OBJECTDIR}/Itinerario.o \
 	${OBJECTDIR}/Moto.o \
+	${OBJECTDIR}/THashCliente.o \
 	${OBJECTDIR}/fecha.o \
 	${OBJECTDIR}/main.o
 
@@ -86,6 +87,11 @@ ${OBJECTDIR}/Moto.o: Moto.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Moto.o Moto.cpp
+
+${OBJECTDIR}/THashCliente.o: THashCliente.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/THashCliente.o THashCliente.cpp
 
 ${OBJECTDIR}/fecha.o: fecha.cpp
 	${MKDIR} -p ${OBJECTDIR}

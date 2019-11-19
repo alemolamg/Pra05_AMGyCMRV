@@ -10,8 +10,29 @@
 #include "Moto.h"
 #include "EcoCityMoto.h"
 
+void calcularPrimos(int num){
+    int divisor = 1, divisores = 0;
+
+    do{
+        if(num % divisor == 0){
+            divisores++;
+        }
+    divisor++;
+    }while(divisor <= num);
+    if(divisores == 2){
+        cout<<"n-> El numero "<<num<<" es PRIMO.";
+    }else{
+        cout<<"n-> El numero "<<num<<" NO es PRIMO.";
+    }
+}
+
+
+
 int main(){    
+    int primo=20;
     
+    calcularPrimos(primo);
+   /* 
     setlocale(LC_ALL,"es_ES.UTF8"); 
     srand(time(0));
      try{ 
@@ -78,6 +99,6 @@ int main(){
      } 
      
      
-    return 0;
+    return 0;*/
     
 }
