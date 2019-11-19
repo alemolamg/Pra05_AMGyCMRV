@@ -11,6 +11,7 @@
 #include "Moto.h"
 #include <vector>
 #include <map>
+//#include "THashCliente.h"
 #include<stdlib.h>
 #include<time.h>
 
@@ -20,7 +21,9 @@ class EcoCityMoto {
 private:
     unsigned idUltimo;
     vector <Moto> motos;
-    map <string,Cliente> clientes;
+    map <string,Cliente> clientes;//se borrará
+    //THashCliente Cliente;
+    vector<string> dniClientes;
     
     //---FUNCIONES----------//
     void cargarMotos(string fileNameMotos);
