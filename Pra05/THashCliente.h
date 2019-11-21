@@ -18,13 +18,7 @@
 enum EstadoCaja {VACIA,OCUPADA,DISPONIBLE};
 
 //clave para dispersion de cadenas
-inline unsigned long djb2(unsigned char *str) {
-    unsigned long hash = 5381;
-    int c;
-    while (c = *str++)
-        hash = ((hash << 5) + hash) + c;
-        return hash;
-    }
+
 
 
 class THashCliente {
@@ -46,17 +40,34 @@ private:
     unsigned long primo;//ToDo: preguntar si funciona 
     std::vector<Entrada> tabla;
     
+    //--------Funciones--------//
+    unsigned long calcPrimo(unsigned long tam);
+    
+    
 public:
+    bool esprimo(unsigned n);
+    
+    inline unsigned long djb2(unsigned char *str) {
+    unsigned long hash = 5381;
+    int c;
+    while (c = *str++)
+        hash = ((hash << 5) + hash) + c;
+        return hash;
+    }
+    //-----Funciones--THash--------//
+    
+    
     
     //-----Sin-Implementar---------//
     THashCliente();
-    THashCliente(unsigned long tamTabla);
+    THashCliente(unsigned long tamTabla=1);
     THashCliente(const THashCliente& orig);
     virtual ~THashCliente();
     
-    unsigned long hash1(unsigned long clave, int intento); 
-    bool insertar(unsigned long clave,const std::string& dni,Cliente& cli);
-    bool buscar (unsigned long clave,string &dni, Cliente* &cli);
+    unsigned long hash1(int intento); 
+    unsigned long hash2(int intento);
+    bool insertar(const std::string& dni,Cliente& cli);
+    bool buscar (string &dni, Cliente* &cli);
     unsigned int numClientes();
     void redispersar (unsigned tamaNuevo);
     
@@ -68,9 +79,5 @@ public:
 
 };
 
-//------Implementación--------------//???
-
-
 
 #endif /* THASHCLIENTE_H */
-
