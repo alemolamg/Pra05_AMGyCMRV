@@ -11,7 +11,7 @@
 #include "Moto.h"
 #include <vector>
 #include <map>
-//#include "THashCliente.h"
+#include "THashCliente.h"
 #include<stdlib.h>
 #include<time.h>
 
