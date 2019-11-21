@@ -45,7 +45,7 @@ private:
     
     
 public:
-    bool esprimo(unsigned long n);
+    bool esprimo(unsigned n);
     
     inline unsigned long djb2(unsigned char *str) {
     unsigned long hash = 5381;
