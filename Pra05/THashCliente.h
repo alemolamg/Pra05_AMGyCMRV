@@ -30,13 +30,14 @@ private:
         EstadoCaja marca;
         //Cliente dato;
         //Entrada(): marca(VACIA),clave(0),dni(""),dato(Cliente()){}
-        ~Entrada(){}
+        Entrada(): marca(VACIA),clave(0),dni(""){};
+        ~Entrada(){};
     };
     
     unsigned long tamFisico;
     unsigned long tamLogico;
     unsigned long totalColisiones;
-    unsigned long maxColisiones;
+    unsigned long maxCol;
     unsigned long primo;//ToDo: preguntar si funciona 
     std::vector<Entrada> tabla;
     
@@ -55,24 +56,27 @@ public:
         return hash;
     }
     //-----Funciones--THash--------//
-    
-    
-    
-    //-----Sin-Implementar---------//
-    THashCliente();
     THashCliente(unsigned long tamTabla=1);
-    THashCliente(const THashCliente& orig);
     virtual ~THashCliente();
     
+    unsigned int numClientes();
+    
+    
+    //---Funciones-Extra----//
+    unsigned int maxColisiones();
+    
+    //-----Sin-Implementar---------//
+    //THashCliente();
+    
+    THashCliente(const THashCliente& orig); //ToDo: preguntar organización
+       
     unsigned long hash1(int intento); 
     unsigned long hash2(int intento);
     bool insertar(const std::string& dni,Cliente& cli);
     bool buscar (string &dni, Cliente* &cli);
-    unsigned int numClientes();
     void redispersar (unsigned tamaNuevo);
     
     //---Funciones-Extra----//
-    unsigned int calMaxColisiones();
     unsigned int promedioColisiones();
     float factorCarga();
     unsigned int tamaTabla();    
