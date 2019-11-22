@@ -41,7 +41,7 @@ private:
     std::vector<Entrada> tabla;
     
     //--------Funciones--------//
-    unsigned long calcPrimo(unsigned long tam);
+    unsigned long calcPrimo(unsigned long& tam);
     
     
 public:

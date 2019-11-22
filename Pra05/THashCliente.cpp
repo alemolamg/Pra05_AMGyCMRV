@@ -12,7 +12,7 @@
 THashCliente::THashCliente(unsigned long tamTabla):
     tamFisico(tamTabla),tamLogico(0),totalColisiones(0),
     maxColisiones(0),tabla(tamTabla,Entrada()){
-    //primo
+    primo=calcPrimo(tamFisico);
 }
 
 THashCliente::THashCliente(const THashCliente& orig) {
@@ -21,7 +21,7 @@ THashCliente::THashCliente(const THashCliente& orig) {
 THashCliente::~THashCliente() {
 }
 
-unsigned long THashCliente::calcPrimo(unsigned long tam) {
+unsigned long THashCliente::calcPrimo(unsigned long& tam) {
     unsigned long elPrimo; 
     elPrimo=tam+1;
     bool encontrado=false;
