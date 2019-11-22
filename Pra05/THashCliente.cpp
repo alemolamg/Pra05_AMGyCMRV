@@ -28,7 +28,8 @@ THashCliente::~THashCliente() {
 }
 
 unsigned long THashCliente::calcPrimo(unsigned long tam) {
-    unsigned long elPrimo; elPrimo=tam+1;
+    unsigned long elPrimo; 
+    elPrimo=tam+1;
     bool encontrado=false;
     do{
         bool wanda=esprimo(elPrimo);
@@ -42,7 +43,7 @@ unsigned long THashCliente::calcPrimo(unsigned long tam) {
     return elPrimo;
 }
 
-bool esprimo(unsigned n) {
+bool THashCliente::esprimo(unsigned long& n) {
         for (unsigned i = 2; i <= n/2; ++i)
             if (n % i == 0)
                 return false;
