@@ -44,3 +44,8 @@ bool THashCliente::esprimo(unsigned long& n) {
         return true;
     }
 
+THashCliente& EcoCityMoto::getClientes() {
+    return clientes ;
+};
+
+

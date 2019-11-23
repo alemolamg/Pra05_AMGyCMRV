@@ -21,7 +21,7 @@ class EcoCityMoto {
 private:
     unsigned idUltimo;
     vector <Moto> motos;
-    map <string,Cliente> clientes;//se borrará
+    THasCliente clientes;
     //THashCliente Cliente;
     vector<string> dniClientes;
     
@@ -29,9 +29,11 @@ private:
     void cargarMotos(string fileNameMotos);
     void cargarClientes(const string &fileNameClientes);
     void crearItinerarios(int num,const UTM &min,const UTM &max);
-    void guardarClientesItinerarios(const string &fileName);    
+    void guardarClientesItinerarios(const string &fileName);   
+    THashCliente& getClientes();
     //bool nuevoCliente(Cliente& nuevoCli);
-        
+
+    
 public:
     EcoCityMoto(const string &fileClientes,const string &fileMotos);
     EcoCityMoto(const EcoCityMoto& orig);
@@ -45,7 +47,7 @@ public:
     
     bool nuevoCliente(Cliente& nuevoCli);
     Cliente* buscarCliente(string dni);
-    map<string,Cliente>& getClientes();
+    THashCliente getClientes();
     vector<Moto>& getMotos();
     bool eliminarCliente(std::string borrameid);
     
