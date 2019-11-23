@@ -78,3 +78,34 @@ unsigned long THashCliente::calcPrimoMenor(unsigned long& primer) {
     }while(!encontrado);
     return elPrimo;
 }
+
+bool THashCliente::insertar(const std::string& dni, Cliente *cli) {
+    unsigned int intento=0,y=0;
+    
+    bool encontrado=false;
+    unsigned long clave=djb2((unsigned char*)dni.c_str());
+    
+    while (!encontrado) {
+            y=hash1(clave,intento);           
+            if (tabla[y].marca==VACIA || tabla[y].marca==DISPONIBLE) {                
+                tamLogico++;
+                tabla[y].dni=dni;
+                tabla[y].marca=OCUPADA;
+                tabla[y].clave=clave;                             
+                tabla[y].cliDatos=cli;  //push_back(dato);                                                
+                encontrado = true;   //Encontre un sitio libre  
+            }else               
+                ++intento;   //No he dado aun con una posicion libre
+        }
+    
+    totalColisiones+=intento;
+    if(intento>maxCol)
+        maxCol=intento;
+    return encontrado;
+    
+}
+
+bool THashCliente::buscar(string& dni, Cliente*& cli) {
+    bool encontrado=false;
+    
+}
