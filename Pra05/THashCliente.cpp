@@ -6,16 +6,19 @@
  */
 
 #include <queue>
-
+#include "Cliente.h"
 #include "THashCliente.h"
 
 THashCliente::THashCliente(unsigned long tamTabla):
     tamFisico(tamTabla),tamLogico(0),totalColisiones(0),
-    maxColisiones(0),tabla(tamTabla,Entrada()){
+    maxCol(0),tabla(tamTabla,Entrada()){
     primo=calcPrimo(tamFisico);
 }
 
-THashCliente::THashCliente(const THashCliente& orig) {
+THashCliente::THashCliente(const THashCliente& orig):
+    tamFisico(orig.tamFisico), tamLogico(orig.tamLogico),totalColisiones(orig.totalColisiones),
+    maxCol(orig.maxCol), tabla(orig.tamFisico,Entrada()){
+    primo=calcPrimo(tamFisico);
 }
 
 THashCliente::~THashCliente() {
@@ -31,16 +34,47 @@ unsigned long THashCliente::calcPrimo(unsigned long& tam) {
             if(tam/elPrimo>=0.60)
                 encontrado=true;
             else
-                ++elPrimo;
-        }              
+                if(tam/elPrimo>=0.70)
+                    --elPrimo;
+                else
+                    ++elPrimo;
+        }           
     }while(!encontrado);
     return elPrimo;
 }
 
-bool THashCliente::esprimo(unsigned long& n) {
-        for (unsigned i = 2; i <= n/2; ++i)
-            if (n % i == 0)
+bool THashCliente::esprimo(unsigned long& num) {
+        for (unsigned i = 2; i <= num/2; i++)
+            if (num % i == 0)
                 return false;
         return true;
-    }
+}
 
+unsigned int THashCliente::numClientes(){
+    return tamFisico;
+}
+
+unsigned int THashCliente::maxColisiones(){
+    return maxCol;
+}
+
+unsigned long THashCliente::hash1(unsigned long& clave, int intento) {
+    unsigned long hashGen,nuevoPrimo=calcPrimoMenor(primo);
+    
+    hashGen=(clave)+ (intento*(clave%nuevoPrimo));
+    return hashGen;
+}
+
+unsigned long THashCliente::calcPrimoMenor(unsigned long& primer) {
+    unsigned long elPrimo; 
+    elPrimo=primer+1;
+    bool encontrado=false;
+    do{
+        bool wanda=esprimo(elPrimo);
+        if(wanda)
+            encontrado=true;
+        else
+            --elPrimo;                  
+    }while(!encontrado);
+    return elPrimo;
+}
