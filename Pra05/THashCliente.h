@@ -69,13 +69,15 @@ public:
     
     //---Funciones-Extra----//
     unsigned int maxColisiones();
-    
+    bool insertar(const std::string& dni,Cliente *cli);
+    bool buscar (string &dni, Cliente* &cli);
+
     //-----Sin-Implementar---------//
     
     THashCliente(const THashCliente& orig); //ToDo: preguntar organización
        
-    bool insertar(const std::string& dni,Cliente& cli);
-    bool buscar (string &dni, Cliente* &cli);
+    
+
     void redispersar (unsigned tamaNuevo);
     
     //---Funciones-Extra----//
