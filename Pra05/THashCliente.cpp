@@ -65,6 +65,7 @@ unsigned long THashCliente::hash1(unsigned long& clave, int intento) {
     return hashGen;
 }
 
+
 unsigned long THashCliente::calcPrimoMenor(unsigned long& primer) {
     unsigned long elPrimo; 
     elPrimo=primer+1;
@@ -78,3 +79,4 @@ unsigned long THashCliente::calcPrimoMenor(unsigned long& primer) {
     }while(!encontrado);
     return elPrimo;
 }
+
