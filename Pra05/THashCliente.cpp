@@ -6,7 +6,7 @@
  */
 
 #include <queue>
-
+#include "Cliente.h"
 #include "THashCliente.h"
 
 THashCliente::THashCliente(unsigned long tamTabla):
@@ -58,6 +58,23 @@ unsigned int THashCliente::maxColisiones(){
     return maxCol;
 }
 
-unsigned long hash1(int intento){
+unsigned long THashCliente::hash1(unsigned long& clave, int intento) {
+    unsigned long hashGen,nuevoPrimo=calcPrimoMenor(primo);
     
+    hashGen=(clave)+ (intento*(clave%nuevoPrimo));
+    return hashGen;
+}
+
+unsigned long THashCliente::calcPrimoMenor(unsigned long& primer) {
+    unsigned long elPrimo; 
+    elPrimo=primer+1;
+    bool encontrado=false;
+    do{
+        bool wanda=esprimo(elPrimo);
+        if(wanda)
+            encontrado=true;
+        else
+            --elPrimo;                  
+    }while(!encontrado);
+    return elPrimo;
 }

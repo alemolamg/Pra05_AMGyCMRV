@@ -7,30 +7,32 @@
 #ifndef THASHCLIENTE_H
 #define THASHCLIENTE_H
 
+#include "Cliente.h"
+//#include "EcoCityMoto.h"
 #include <vector>
 #include <set>
 #include <string>
 #include <iostream>
-#include "Cliente.h"
+
 
 //#define limite 20
 
 enum EstadoCaja {VACIA,OCUPADA,DISPONIBLE};
 
-//clave para dispersion de cadenas
-
-
+//class Cliente;
 
 class THashCliente {
 private:
+    //friend class Entrada;
     class Entrada{
+        friend class Cliente;
     public:
         unsigned long clave;
         std::string dni;
         EstadoCaja marca;
-        //Cliente dato;
-        //Entrada(): marca(VACIA),clave(0),dni(""),dato(Cliente()){}
-        Entrada(): marca(VACIA),clave(0),dni(""){};
+        Cliente* cliDatos;
+        Entrada(): marca(VACIA),clave(0),dni(""),cliDatos(0){}
+        //Entrada(): marca(VACIA),clave(0),dni(""){};
         ~Entrada(){};
     };
     
@@ -38,11 +40,14 @@ private:
     unsigned long tamLogico;
     unsigned long totalColisiones;
     unsigned long maxCol;
-    unsigned long primo;//ToDo: preguntar si funciona 
+    unsigned long primo;// Primo usado para la tabla=tam
     std::vector<Entrada> tabla;
     
     //--------Funciones--------//
     unsigned long calcPrimo(unsigned long& tam);
+    unsigned long calcPrimoMenor(unsigned long& primer);
+    unsigned long hash1(unsigned long& clave, int intento); 
+    unsigned long hash2(unsigned long& clave, int intento);
     
     
 public:
@@ -66,12 +71,9 @@ public:
     unsigned int maxColisiones();
     
     //-----Sin-Implementar---------//
-    //THashCliente();
     
     THashCliente(const THashCliente& orig); //ToDo: preguntar organización
        
-    unsigned long hash1(int intento); 
-    unsigned long hash2(int intento);
     bool insertar(const std::string& dni,Cliente& cli);
     bool buscar (string &dni, Cliente* &cli);
     void redispersar (unsigned tamaNuevo);

@@ -22,7 +22,7 @@ private:
     unsigned idUltimo;
     vector <Moto> motos;
     map <string,Cliente> clientes;//se borrará
-    //THashCliente Cliente;
+    //THashCliente clientes2;
     vector<string> dniClientes;
     
     //---FUNCIONES----------//
