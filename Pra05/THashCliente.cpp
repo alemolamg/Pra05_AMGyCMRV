@@ -107,5 +107,11 @@ bool THashCliente::insertar(const std::string& dni, Cliente *cli) {
 
 bool THashCliente::buscar(string& dni, Cliente*& cli) {
     bool encontrado=false;
+    int intento=0;
+    unsigned long y=0, clave = djb2((unsigned char*)dni.c_str());
+    
+    while (!encontrado){
+        y=hash1(clave,intento);
+    }
     
 }
