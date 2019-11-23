@@ -23,6 +23,7 @@ private:
     vector <Moto> motos;
     THasCliente clientes;
     //THashCliente Cliente;
+
     vector<string> dniClientes;
     
     //---FUNCIONES----------//
