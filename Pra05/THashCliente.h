@@ -65,15 +65,16 @@ public:
     virtual ~THashCliente();
     
     unsigned int numClientes();
+    bool insertar(const std::string& dni,Cliente *cli);
     bool buscar (string &dni, Cliente* &cli);
     
     //---Funciones-Extra----//
     unsigned int maxColisiones();
-    bool insertar(const std::string& dni,Cliente *cli);
+    bool insertarEnNueva(vector<Entrada>& nuevo, const std::string& dni,Cliente *cli, int posicion);
     float promedioColisiones();
     float factorCarga();
 
-    //-----Sin-Implementar---------//
+     //-----Sin-Implementar---------//
     
     THashCliente(const THashCliente& orig); //ToDo: preguntar organización
     void redispersar (unsigned tamaNuevo);
@@ -84,6 +85,4 @@ public:
     unsigned int tamaTabla();    
 
 };
-
-
 #endif /* THASHCLIENTE_H */
