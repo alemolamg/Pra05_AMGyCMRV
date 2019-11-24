@@ -252,9 +252,9 @@ Cliente* EcoCityMoto::buscarCliente(string dni){
     throw std::invalid_argument("No esta este cliente");
 }
 
-map<string,Cliente>& EcoCityMoto::getClientes(){
+/*map<string,Cliente>& EcoCityMoto::getClientes(){
     return clientes;
-}
+}*/
 
 vector<Moto>& EcoCityMoto::getMotos(){
     return motos;

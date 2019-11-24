@@ -51,7 +51,7 @@ bool THashCliente::esprimo(unsigned long& num) {
 }
 
 unsigned int THashCliente::numClientes(){
-    return tamFisico;
+    return tamLogico;
 }
 
 unsigned int THashCliente::maxColisiones(){
@@ -81,7 +81,6 @@ unsigned long THashCliente::calcPrimoMenor(unsigned long& primer) {
 
 bool THashCliente::insertar(const std::string& dni, Cliente *cli) {
     unsigned int intento=0,y=0;
-    
     bool encontrado=false;
     unsigned long clave=djb2((unsigned char*)dni.c_str());
     
@@ -90,9 +89,9 @@ bool THashCliente::insertar(const std::string& dni, Cliente *cli) {
             if (tabla[y].marca==VACIA || tabla[y].marca==DISPONIBLE) {                
                 tamLogico++;
                 tabla[y].dni=dni;
-                tabla[y].marca=OCUPADA;
                 tabla[y].clave=clave;                             
                 tabla[y].cliDatos=cli;  //push_back(dato);                                                
+                tabla[y].marca=OCUPADA;
                 encontrado = true;   //Encontre un sitio libre  
             }else               
                 ++intento;   //No he dado aun con una posicion libre
@@ -102,7 +101,6 @@ bool THashCliente::insertar(const std::string& dni, Cliente *cli) {
     if(intento>maxCol)
         maxCol=intento;
     return encontrado;
-    
 }
 
 bool THashCliente::buscar(string& dni, Cliente*& cli) {
@@ -112,6 +110,24 @@ bool THashCliente::buscar(string& dni, Cliente*& cli) {
     
     while (!encontrado){
         y=hash1(clave,intento);
+        
+        if(tabla[y].marca==VACIA || tabla[y].marca==DISPONIBLE){
+            cli=nullptr;
+        }else                
+            if(tabla[y].marca==OCUPADA && tabla[y].dni==dni){
+                cli=tabla[y].cliDatos;
+                encontrado=true;
+            }else
+                ++i;
     }
-    
+    return encontrado;   
 }
+
+float THashCliente::promedioColisiones() {
+    return (float)(totalColisiones/tamLogico);
+}
+
+float THashCliente::factorCarga() {
+    return (float) tamLogico/tamFisico;
+}
+
