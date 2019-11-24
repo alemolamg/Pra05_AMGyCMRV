@@ -71,6 +71,7 @@ public:
     unsigned int maxColisiones();
     bool insertar(const std::string& dni,Cliente *cli);
     float promedioColisiones();
+    float factorCarga();
 
     //-----Sin-Implementar---------//
     
@@ -79,7 +80,7 @@ public:
     
     //---Funciones-Extra----//
     
-    float factorCarga();
+    
     unsigned int tamaTabla();    
 
 };
