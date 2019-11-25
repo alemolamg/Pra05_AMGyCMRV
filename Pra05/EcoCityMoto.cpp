@@ -290,6 +290,7 @@ void EcoCityMoto::guardarClientesItinerarios(const string& fileName) {
     //Asociamos el flujo al fichero 
     fs.open(fileName,ofstream::trunc);
     
+    
     if(fs.good()){
         map<string,Cliente>::iterator it=clientes.begin();
         fs << "2;NIF;clave;nomape;dirección;latitud;longitud;nIti;bajar_linea;id;inicioLat;inicioLon;finLat;finLon;dia;mes;anio;hora;minuto;minutos;moto" << endl;
