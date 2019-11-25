@@ -241,7 +241,6 @@ void EcoCityMoto::SetIdUltimo(unsigned nuevoIdUltimo){
 }
 
 
-
 Cliente* EcoCityMoto::buscarCliente(string dni){//ToDo: Cambiar al final de la hash
     Cliente *elCliente=0;
     bool encontrado=false;
@@ -249,10 +248,10 @@ Cliente* EcoCityMoto::buscarCliente(string dni){//ToDo: Cambiar al final de la h
     //it=clientes.find(dni);
     if(encontrado)
         return elCliente;
-
         
     throw std::invalid_argument("No esta este cliente");
 }
+
 
 vector<Moto>& EcoCityMoto::getMotos(){
     return motos;
@@ -278,7 +277,7 @@ Moto* EcoCityMoto::LocMotoCercana(UTM& ubicacion) {
 }
 
 void EcoCityMoto::crearItinerarios(int num, const UTM& min, const UTM& max) {
-    THashCliente::iterator iterador=clientes.begin();
+    map<string,Cliente>::iterator iterador=clientes.begin();
     while (iterador!=clientes.end()) {
         iterador->second.crearItinerario(num,idUltimo,min,max);
         idUltimo=idUltimo+num;
@@ -290,6 +289,7 @@ void EcoCityMoto::guardarClientesItinerarios(const string& fileName) {
      ofstream fs;                    //Flujo de salida
     //Asociamos el flujo al fichero 
     fs.open(fileName,ofstream::trunc);
+    
     
     if(fs.good()){
         map<string,Cliente>::iterator it=clientes.begin();
