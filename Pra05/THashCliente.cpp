@@ -1,7 +1,6 @@
 /* 
  * File:   THashCliente.cpp
- * Author: molej
- * 
+ * Author: Alemol 
  * Created on 19 de noviembre de 2019, 11:43
  */
 
@@ -17,11 +16,7 @@ THashCliente::THashCliente(unsigned long tamTabla):
 
 THashCliente::THashCliente(const THashCliente& orig):
     tamFisico(orig.tamFisico), tamLogico(orig.tamLogico),totalColisiones(orig.totalColisiones),
-    maxCol(orig.maxCol), tabla(orig.tamFisico,Entrada()){
-    
-    primo=calcPrimo(tamFisico);
-    
-}
+    maxCol(orig.maxCol),primo(orig.primo) ,tabla(orig.tabla){}
 
 THashCliente::~THashCliente() {
 }
@@ -158,11 +153,16 @@ void THashCliente::redispersar(unsigned tamaNuevo) {
     totalColisiones+=intento;
     if(intento>maxCol)
         maxCol=intento;
-    return encontrado;
-            
+    //return encontrado;    
         }
     
     }
+    
+    tabla=nueva;
+}
+
+unsigned int THashCliente::tamaTabla() {
+    return tamFisico;
 }
 
 

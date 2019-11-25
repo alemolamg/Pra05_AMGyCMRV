@@ -74,14 +74,14 @@ public:
     float promedioColisiones();
     float factorCarga();
 
+    
+    
      //-----Sin-Implementar---------//
     
     THashCliente(const THashCliente& orig); //ToDo: preguntar organización
-    void redispersar (unsigned tamaNuevo);
+    void redispersar (unsigned tamaNuevo); //ToDo: revisar que funciona correctamente
     
     //---Funciones-Extra----//
-    
-    
     unsigned int tamaTabla();    
 
 };
