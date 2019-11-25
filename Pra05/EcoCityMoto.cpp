@@ -242,20 +242,16 @@ void EcoCityMoto::SetIdUltimo(unsigned nuevoIdUltimo){
 
 
 Cliente* EcoCityMoto::buscarCliente(string dni){//ToDo: Cambiar al final de la hash
-    map<string,Cliente>::iterator it;
-    it=clientes.find(dni);
-    if(it!= clientes.end()){ 
-        //return (&(it->second)); //ToDo: cambiar cabacera referencia por puntero para que esto funcione
-        Cliente* encontrado =(&(it->second));
-        return encontrado;
-    }
+    Cliente *elCliente=0;
+    bool encontrado=false;
+    encontrado=clientes.buscar(dni,elCliente);
+    //it=clientes.find(dni);
+    if(encontrado)
+        return elCliente;
         
     throw std::invalid_argument("No esta este cliente");
 }
 
-/*map<string,Cliente>& EcoCityMoto::getClientes(){
-    return clientes;
-}*/
 
 vector<Moto>& EcoCityMoto::getMotos(){
     return motos;
@@ -326,11 +322,13 @@ void EcoCityMoto::guardarClientesItinerarios(const string& fileName) {
 
 bool EcoCityMoto::nuevoCliente(Cliente& nuevoCli) {
     std::string clave=nuevoCli.GetDni();
-    return (clientes.insert(std::pair<std::string,Cliente>(clave,nuevoCli)).second);
+    //return (clientes.insert(std::pair<std::string,Cliente>(clave,nuevoCli)).second);
+    return (clientes.insertar(clave,&nuevoCli));
 }
 
-bool EcoCityMoto::eliminarCliente(std::string borrameid) {
+bool EcoCityMoto::eliminarCliente(std::string borrameid) {//ToDo: Arreglar THashCliente, falta borrar();
     return clientes.erase(borrameid);
+    //return clientes.borra;
 }
 
 vector<Moto*> EcoCityMoto::localizaMotosSinBateria() {
