@@ -21,7 +21,7 @@ class EcoCityMoto {
 private:
     unsigned idUltimo;
     vector <Moto> motos;
-    THasCliente clientes;
+    THashCliente clientes;
     //THashCliente Cliente;
 
     vector<string> dniClientes;
@@ -48,7 +48,6 @@ public:
     
     bool nuevoCliente(Cliente& nuevoCli);
     Cliente* buscarCliente(string dni);
-    THashCliente getClientes();
     vector<Moto>& getMotos();
     bool eliminarCliente(std::string borrameid);
     

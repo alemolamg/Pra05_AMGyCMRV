@@ -23,6 +23,7 @@ class EcoCityMoto;
 
 class Cliente {
   
+    std::string display;
     std::string dni;
     std::string pass;
     std::string nombre;
@@ -65,6 +66,9 @@ public:
     void setRutas(list<Itinerario> rutaNueva);
     
     void cargaItinerario(const Itinerario &iti);
+    
+    void mostrarMensaje(string texto);
+    
     
 };
 

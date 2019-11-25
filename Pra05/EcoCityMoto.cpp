@@ -241,7 +241,7 @@ void EcoCityMoto::SetIdUltimo(unsigned nuevoIdUltimo){
 
 
 Cliente* EcoCityMoto::buscarCliente(string dni){
-    map<string,Cliente>::iterator it;
+    THashCliente it;
     it=clientes.find(dni);
     if(it!= clientes.end()){
         //return (&(it->second)); //ToDo: cambiar cabacera referencia por puntero para que esto funcione
@@ -250,10 +250,6 @@ Cliente* EcoCityMoto::buscarCliente(string dni){
     }
         
     throw std::invalid_argument("No esta este cliente");
-}
-
-map<string,Cliente>& EcoCityMoto::getClientes(){
-    return clientes;
 }
 
 vector<Moto>& EcoCityMoto::getMotos(){
@@ -280,7 +276,7 @@ Moto* EcoCityMoto::LocMotoCercana(UTM& ubicacion) {
 }
 
 void EcoCityMoto::crearItinerarios(int num, const UTM& min, const UTM& max) {
-    map<string,Cliente>::iterator iterador=clientes.begin();
+    THashCliente::iterator iterador=clientes.begin();
     while (iterador!=clientes.end()) {
         iterador->second.crearItinerario(num,idUltimo,min,max);
         idUltimo=idUltimo+num;
