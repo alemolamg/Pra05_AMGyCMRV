@@ -9,6 +9,7 @@
 #include "Cliente.h"
 #include "Moto.h"
 #include "EcoCityMoto.h"
+#define total 17369
 
 void calcularPrimos(int num){
     int divisor = 1, divisores = 0;
@@ -28,11 +29,13 @@ void calcularPrimos(int num){
 
 
 
+
+
 int main(){    
     int primo=20;
     
     calcularPrimos(primo);
-   /* 
+   /*
     setlocale(LC_ALL,"es_ES.UTF8"); 
     srand(time(0));
      try{ 
@@ -99,6 +102,6 @@ int main(){
      } 
      
      
-    return 0;*/
+    return 0;  */
     
 }

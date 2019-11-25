@@ -40,6 +40,7 @@ public:
     float getPorcentajeBateria() const;
     void setStatus(tipoEstado status);
     void setPosicion(UTM posicion);
+    void darAviso();
     
     
 private:
