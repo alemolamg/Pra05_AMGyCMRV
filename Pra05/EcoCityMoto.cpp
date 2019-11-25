@@ -329,6 +329,7 @@ bool EcoCityMoto::nuevoCliente(Cliente& nuevoCli) {
 bool EcoCityMoto::eliminarCliente(std::string borrameid) {//ToDo: Arreglar THashCliente, falta borrar();
     return clientes.erase(borrameid);
     //return clientes.borra;
+    
 }
 
 vector<Moto*> EcoCityMoto::localizaMotosSinBateria() {
