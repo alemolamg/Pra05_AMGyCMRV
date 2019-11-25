@@ -157,7 +157,6 @@ void THashCliente::redispersar(unsigned tamaNuevo) {
         }
     
     }
-    
     tabla=nueva;
 }
 
