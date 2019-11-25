@@ -22,7 +22,7 @@ private:
     unsigned idUltimo;
     vector <Moto> motos;
     THashCliente clientes;
-    
+
     vector<string> dniClientes;
     
     //---FUNCIONES----------//
@@ -47,7 +47,7 @@ public:
     
     bool nuevoCliente(Cliente& nuevoCli);
     Cliente* buscarCliente(string dni);
-//    THashCliente getClientes();
+
     vector<Moto>& getMotos();
     bool eliminarCliente(std::string borrameid);
     

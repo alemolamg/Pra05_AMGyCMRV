@@ -5,6 +5,7 @@
  */
 
 #include "Moto.h"
+#include "Cliente.h"
 
 Moto::Moto(tipoEstado _status,string _id,double _dlat,double _dlon ):
     status(_status),id(_id),posicion(_dlat,_dlon),usadoPor(nullptr),porcentajeBateria((rand()%100)+1)
@@ -78,3 +79,13 @@ void Moto::setStatus(tipoEstado status) {
 void Moto::setPosicion(UTM posicion) {
     this->posicion = posicion;
 }
+
+void Moto::darAviso(){
+    switch(status){
+        case 0: usadoPor->mostrarMensaje("Sinbateria");break;
+        case 1: usadoPor->mostrarMensaje("Activada");break;
+        case 2: usadoPor->mostrarMensaje("Bloqueada");break;
+        case 3: usadoPor->mostrarMensaje("Rota");break;
+                
+    }
+};

@@ -149,7 +149,7 @@ void Cliente::crearItinerario(int num, int idUltimo, UTM min, UTM max) {
  void Cliente::terminarTrayecto(){ 
      list<Itinerario>::iterator i=rutas.end();
      i--;
-//        i->GetVehiculo()->seDesactiva();  //bloquea la moto y la desvincula del cliente
+   
         Fecha f1= i->GetFecha(); 
         Fecha f2;    
          
@@ -161,8 +161,9 @@ void Cliente::crearItinerario(int num, int idUltimo, UTM min, UTM max) {
         int minutos= (f2.verHora()*60 + f2.verMin())- (f1.verHora()*60 + f1.verMin()); 
         i->SetMinutos(minutos);
         
-        i->GetVehiculo()->seDesactiva();  //bloquea la moto y la desvincula del cliente
-        
+
+         i->GetVehiculo()->seDesactiva(); //bloquea la moto y la desvincula del cliente
+
  }
  
  std::ostream& operator<<(std::ostream& out, const Cliente& f){
@@ -186,3 +187,8 @@ std::string Cliente::getDisplay() const {
 void Cliente::setRutas(list<Itinerario> rutaNueva) {
     this->rutas=rutaNueva;
 }
+
+void Cliente::mostrarMensaje(string texto){
+    display=texto;
+   cout<<" El estado en el que se encuentra nuestra moto es" << display << std::endl;
+};
