@@ -142,8 +142,7 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
                             minLat=dlat;
                     //con todos los atributos leídos, se crea el cliente
                     Cliente client (dni, nombre, pass, direccion,dlat, dlon, this);
-                    clientes[dni]=client;                
-
+                    clientes.insertar(dni,&client);
                    //std::cout << client.GetDni() << ";" << client.GetNombre() <<std::endl;            
                 }              
                 getline(fe, linea);     //Toma una línea del fichero
@@ -177,9 +176,10 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
                     
                     //con todos los atributos leídos, se crea el cliente
                     Cliente client (dni, nombre, pass, direccion,dlat, dlon, this);
-                    clientes[dni]=client; 
+                    clientes.insertar(dni,&client); 
                     //obtengo un iterador al cliente insertado para asignarle los itinerarios
-                    map<string,Cliente>::iterator itCli= clientes.find(dni);
+                    //clientes.buscar(dni,client);
+                    //map<string,Cliente>::iterator itCli= clientes.find(dni);
                     string nIti,mot;
                     int id,dia,mes,anio,hora,min,minutos;
                     float iniLat,finLat,iniLon,finLon;
@@ -210,7 +210,8 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
                             itMoto++;
                         }
                         Itinerario iti(id,UTM(iniLat,iniLon),UTM(finLat,finLon),Fecha(dia,mes,anio,hora,min),minutos,&(*itMoto));;
-                        itCli->second.cargaItinerario(iti);   //agregamos itinerario al cliente                                  
+                        //ToDo: Crear iterador y añadirlo a cliente.
+                        //itCli->second.cargaItinerario(iti);   //agregamos itinerario al cliente                                  
                     }                                                               
                 }              
                 getline(fe, linea);     //Toma una línea del fichero
@@ -240,10 +241,10 @@ void EcoCityMoto::SetIdUltimo(unsigned nuevoIdUltimo){
 }
 
 
-Cliente* EcoCityMoto::buscarCliente(string dni){
+Cliente* EcoCityMoto::buscarCliente(string dni){//ToDo: Cambiar al final de la hash
     map<string,Cliente>::iterator it;
     it=clientes.find(dni);
-    if(it!= clientes.end()){
+    if(it!= clientes.end()){ 
         //return (&(it->second)); //ToDo: cambiar cabacera referencia por puntero para que esto funcione
         Cliente* encontrado =(&(it->second));
         return encontrado;
