@@ -7,3 +7,4 @@ Ver 5.0,5.1: Añade la práctica 4 y corrige pequeños errores.
 Trabajando en la Versión 5.2 y 5.3: Creación clase THashCliente.
 
 Trabajando en la Versión 5.5: Ajustando EcoCityMoto
+Trabajando en la Versión 5.6: Ajustando EcoCityMoto
