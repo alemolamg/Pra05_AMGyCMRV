@@ -18,7 +18,9 @@ THashCliente::THashCliente(unsigned long tamTabla):
 THashCliente::THashCliente(const THashCliente& orig):
     tamFisico(orig.tamFisico), tamLogico(orig.tamLogico),totalColisiones(orig.totalColisiones),
     maxCol(orig.maxCol), tabla(orig.tamFisico,Entrada()){
+    
     primo=calcPrimo(tamFisico);
+    
 }
 
 THashCliente::~THashCliente() {
@@ -130,4 +132,37 @@ float THashCliente::promedioColisiones() {
 float THashCliente::factorCarga() {
     return (float) tamLogico/tamFisico;
 }
+
+void THashCliente::redispersar(unsigned tamaNuevo) {
+    vector<Entrada> nueva(tamaNuevo,Entrada());
+    tamFisico=tamaNuevo;
+    
+    for (int i=0; i<tabla.size(); i++){       
+        unsigned posNueva=0, intento=0;
+        bool encontrado = false;
+        if (tabla[i].marca==OCUPADA){
+            unsigned long clave=djb2((unsigned char*)tabla[i].dni.c_str());
+            //bool insertCliente=insertarEnNueva(nueva,tabla[i].dni,tabla[i].cliDatos);
+            
+            while (!encontrado) {
+            posNueva=hash1(clave,intento);           
+            if (nueva[posNueva].marca!=OCUPADA) {
+                nueva[posNueva].dni=tabla[i].dni;
+                nueva[posNueva].clave=clave;
+                nueva[posNueva].cliDatos=tabla[i].cliDatos;
+                encontrado = true;   //Encontre un sitio libre  
+            }else               
+                ++intento;   //No he dado aun con una posicion libre
+        }
+    
+    totalColisiones+=intento;
+    if(intento>maxCol)
+        maxCol=intento;
+    return encontrado;
+            
+        }
+    
+    }
+}
+
 
