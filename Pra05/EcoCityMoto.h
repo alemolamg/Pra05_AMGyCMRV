@@ -22,7 +22,6 @@ private:
     unsigned idUltimo;
     vector <Moto> motos;
     THashCliente clientes;
-    //THashCliente Cliente;
 
     vector<string> dniClientes;
     
@@ -31,7 +30,7 @@ private:
     void cargarClientes(const string &fileNameClientes);
     void crearItinerarios(int num,const UTM &min,const UTM &max);
     void guardarClientesItinerarios(const string &fileName);   
-    THashCliente& getClientes();
+//    THashCliente& getClientes();
     //bool nuevoCliente(Cliente& nuevoCli);
 
     
@@ -48,6 +47,7 @@ public:
     
     bool nuevoCliente(Cliente& nuevoCli);
     Cliente* buscarCliente(string dni);
+
     vector<Moto>& getMotos();
     bool eliminarCliente(std::string borrameid);
     

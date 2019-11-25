@@ -51,7 +51,6 @@ private:
     
     
 public:
-    bool esprimo(unsigned long& n);
     
     inline unsigned long djb2(unsigned char *str) {
     unsigned long hash = 5381;
@@ -62,28 +61,22 @@ public:
     }
     //-----Funciones--THash--------//
     THashCliente(unsigned long tamTabla=1);
+    THashCliente(const THashCliente& orig); //ToDo: preguntar organización
     virtual ~THashCliente();
     
+    void redispersar (unsigned tamaNuevo); //ToDo: revisar que funciona correctamente
     unsigned int numClientes();
+    bool esprimo(unsigned long& n);
+    bool insertar(const std::string& dni,Cliente *cli);
+    bool buscar (string &dni, Cliente* &cli);
     
     
     //---Funciones-Extra----//
     unsigned int maxColisiones();
-    
-    //-----Sin-Implementar---------//
-    
-    THashCliente(const THashCliente& orig); //ToDo: preguntar organización
-       
-    bool insertar(const std::string& dni,Cliente& cli);
-    bool buscar (string &dni, Cliente* &cli);
-    void redispersar (unsigned tamaNuevo);
-    
-    //---Funciones-Extra----//
-    unsigned int promedioColisiones();
+    bool insertarEnNueva(vector<Entrada>& nuevo, const std::string& dni,Cliente *cli, int posicion);
+    float promedioColisiones();
     float factorCarga();
-    unsigned int tamaTabla();    
+    unsigned int tamaTabla();
 
 };
-
-
 #endif /* THASHCLIENTE_H */

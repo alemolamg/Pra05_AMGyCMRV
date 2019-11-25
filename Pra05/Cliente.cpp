@@ -9,7 +9,7 @@
 #include <algorithm>
 
 Cliente::Cliente(const Cliente& orig):
-        dni(orig.dni),pass(orig.pass), nombre(orig.nombre),
+        dni(orig.dni),pass(orig.pass), nombre(orig.nombre),display(""),
         direccion(orig.direccion),rutas(orig.rutas), acceso(orig.acceso),posicion(orig.posicion){}
 
 bool Cliente::operator<(  Cliente& otro)const {
@@ -29,6 +29,7 @@ Cliente& Cliente:: operator=(const Cliente &orig) {
         posicion=orig.posicion;
         rutas=orig.rutas;
         acceso=orig.acceso;
+        display=orig.display;
     }
     return *this;
 }
@@ -66,7 +67,7 @@ UTM Cliente::creaUTMAleatorio(const UTM &min,const UTM &max) {
         double iniY,iniZ;
         srand(time(NULL));
             int x=rand()%(10000),xx=rand()%(10000); 
-            double y=x/1000, z=xx/1000;
+            double y=(float) x/1000, z=(float) xx/1000;
             y=y*(max.latitud-min.latitud)+min.latitud;
             z=z*(max.longitud-min.longitud)+min.longitud;
                 iniY=y;
@@ -148,7 +149,7 @@ void Cliente::crearItinerario(int num, int idUltimo, UTM min, UTM max) {
  void Cliente::terminarTrayecto(){ 
      list<Itinerario>::iterator i=rutas.end();
      i--;
-         
+   
         Fecha f1= i->GetFecha(); 
         Fecha f2;    
          
@@ -160,7 +161,9 @@ void Cliente::crearItinerario(int num, int idUltimo, UTM min, UTM max) {
         int minutos= (f2.verHora()*60 + f2.verMin())- (f1.verHora()*60 + f1.verMin()); 
         i->SetMinutos(minutos);
         
+
          i->GetVehiculo()->seDesactiva(); //bloquea la moto y la desvincula del cliente
+
  }
  
  std::ostream& operator<<(std::ostream& out, const Cliente& f){
@@ -175,6 +178,10 @@ void Cliente::crearItinerario(int num, int idUltimo, UTM min, UTM max) {
  
 void Cliente::cargaItinerario(const Itinerario& iti) {
     rutas.push_back(iti);
+}
+
+std::string Cliente::getDisplay() const {
+    return display;
 }
 
 void Cliente::setRutas(list<Itinerario> rutaNueva) {
