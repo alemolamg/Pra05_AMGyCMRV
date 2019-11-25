@@ -30,12 +30,13 @@ class Cliente {
     UTM posicion;
     std::list<Itinerario> rutas;
     EcoCityMoto *acceso;
+    std::string display;
     
 public:
     
     Cliente(string _dni,string _nombre="", string _pass="", string _direccion="", double _latitud=0.0, double _longitud=0.0, EcoCityMoto *_ecoC=0):
     dni(_dni), pass(_pass), nombre(_nombre), direccion (_direccion),acceso(_ecoC),rutas() ,posicion (_latitud, _longitud){}
-    Cliente(): nombre(""), dni(""), pass(""), rutas(), acceso(0), direccion(""), posicion(UTM(0.0,0.0)){};
+    Cliente(): nombre(""), dni(""), pass(""), rutas(), acceso(0), direccion(""),display(" ") ,posicion(UTM(0.0,0.0)){};
     
     
     Cliente(const Cliente& orig);
@@ -65,6 +66,7 @@ public:
     void setRutas(list<Itinerario> rutaNueva);
     
     void cargaItinerario(const Itinerario &iti);
+    std::string getDisplay() const;
     
 };
 
