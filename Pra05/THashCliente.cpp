@@ -141,24 +141,15 @@ void THashCliente::redispersar(unsigned tamaNuevo) {
         unsigned posNueva=0, intento=0;
         bool encontrado = false;
         if (tabla[i].marca==OCUPADA){
-            bool insertCliente=insertarEnNueva(nueva,tabla[i].dni,tabla[i].cliDatos);
-                    
-        }
-    
-    }
-}
-
-bool THashCliente::insertarEnNueva(vector<Entrada>& nuevo, const std::string& dni, Cliente* cli, int posicion) {
-    unsigned int intento=0,y=0;
-    bool encontrado=false;
-    unsigned long clave=djb2((unsigned char*)dni.c_str());
-    
-    while (!encontrado) {
-            y=hash1(clave,intento);           
-            if (nuevo[y].marca!=OCUPADA && tabla[posicion].marca==OCUPADA) {
-                nuevo[y].dni=tabla[posicion].dni;
-                nuevo[y].clave=clave;
-                nuevo[y].cliDatos=tabla[posicion].cliDatos;
+            unsigned long clave=djb2((unsigned char*)tabla[i].dni.c_str());
+            //bool insertCliente=insertarEnNueva(nueva,tabla[i].dni,tabla[i].cliDatos);
+            
+            while (!encontrado) {
+            posNueva=hash1(clave,intento);           
+            if (nueva[posNueva].marca!=OCUPADA) {
+                nueva[posNueva].dni=tabla[i].dni;
+                nueva[posNueva].clave=clave;
+                nueva[posNueva].cliDatos=tabla[i].cliDatos;
                 encontrado = true;   //Encontre un sitio libre  
             }else               
                 ++intento;   //No he dado aun con una posicion libre
@@ -168,7 +159,10 @@ bool THashCliente::insertarEnNueva(vector<Entrada>& nuevo, const std::string& dn
     if(intento>maxCol)
         maxCol=intento;
     return encontrado;
+            
+        }
+    
+    }
 }
-
 
 
