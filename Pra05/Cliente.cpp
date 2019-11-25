@@ -67,7 +67,7 @@ UTM Cliente::creaUTMAleatorio(const UTM &min,const UTM &max) {
         double iniY,iniZ;
         srand(time(NULL));
             int x=rand()%(10000),xx=rand()%(10000); 
-            double y=x/1000, z=xx/1000;
+            double y=(float) x/1000, z=(float) xx/1000;
             y=y*(max.latitud-min.latitud)+min.latitud;
             z=z*(max.longitud-min.longitud)+min.longitud;
                 iniY=y;
