@@ -22,8 +22,7 @@ private:
     unsigned idUltimo;
     vector <Moto> motos;
     THashCliente clientes;
-    //THashCliente Cliente;
-
+    
     vector<string> dniClientes;
     
     //---FUNCIONES----------//
