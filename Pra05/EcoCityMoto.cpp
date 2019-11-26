@@ -6,6 +6,8 @@
  */
 #include <fstream>
 #include <sstream>
+#include <iostream>
+#include <algorithm>
 #include "EcoCityMoto.h"
 
 EcoCityMoto::EcoCityMoto(const EcoCityMoto& orig):
@@ -13,6 +15,7 @@ EcoCityMoto::EcoCityMoto(const EcoCityMoto& orig):
 
 
 EcoCityMoto::~EcoCityMoto() {
+    
     guardarClientesItinerarios("prueba.txt");
     std::cout<<"Guardado archivo correctamente"<<std::endl;
 }
@@ -142,7 +145,7 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
                             minLat=dlat;
                     //con todos los atributos leídos, se crea el cliente
                     Cliente client (dni, nombre, pass, direccion,dlat, dlon, this);
-                    clientes.insertar(dni,&client);
+                    clientes.insertar(dni,client);
                    //std::cout << client.GetDni() << ";" << client.GetNombre() <<std::endl;            
                 }              
                 getline(fe, linea);     //Toma una línea del fichero
@@ -176,7 +179,7 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
                     
                     //con todos los atributos leídos, se crea el cliente
                     Cliente client (dni, nombre, pass, direccion,dlat, dlon, this);
-                    clientes.insertar(dni,&client); 
+                    clientes.insertar(dni,client); 
                     //obtengo un iterador al cliente insertado para asignarle los itinerarios
                     //clientes.buscar(dni,client);
                     //map<string,Cliente>::iterator itCli= clientes.find(dni);
@@ -242,7 +245,7 @@ void EcoCityMoto::SetIdUltimo(unsigned nuevoIdUltimo){
 
 
 Cliente* EcoCityMoto::buscarCliente(string dni){//ToDo: Cambiar al final de la hash
-    Cliente *elCliente=0;
+    Cliente *elCliente;
     bool encontrado=false;
     encontrado=clientes.buscar(dni,elCliente);
     //it=clientes.find(dni);
@@ -330,7 +333,7 @@ void EcoCityMoto::guardarClientesItinerarios(const string& fileName) {
 bool EcoCityMoto::nuevoCliente(Cliente& nuevoCli) {
     std::string clave=nuevoCli.GetDni();
     //return (clientes.insert(std::pair<std::string,Cliente>(clave,nuevoCli)).second);
-    return (clientes.insertar(clave,&nuevoCli));
+    return (clientes.insertar(clave,nuevoCli));
 }
 
 bool EcoCityMoto::eliminarCliente(std::string borrameid) {//ToDo: Arreglar THashCliente, falta borrar();

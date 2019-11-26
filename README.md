@@ -6,5 +6,7 @@ entrega practica el jueves 28 de noviembre
 Ver 5.0,5.1: Añade la práctica 4 y corrige pequeños errores.
 Trabajando en la Versión 5.2 y 5.3: Creación clase THashCliente.
 
-Trabajando en la Versión 5.5: Ajustando EcoCityMoto
-Trabajando en la Versión 5.6: Ajustando EcoCityMoto
+Versión 5.5, y 5.6: Ajustando EcoCityMoto para la nueva versión
+
+Tabajando en versión 5.7 o superior: ajustando pequeños detalles
+

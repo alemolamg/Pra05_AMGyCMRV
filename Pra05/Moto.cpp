@@ -4,6 +4,7 @@
  * Created on 28 de octubre de 2019, 9:10
  */
 
+#include <iostream>
 #include "Moto.h"
 #include "Cliente.h"
 

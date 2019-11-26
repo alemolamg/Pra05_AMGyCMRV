@@ -4,10 +4,9 @@
  * Created on 26 de septiembre de 2019, 11:29
  */
 #include "Cliente.h"
-#include "Moto.h"
 #include "EcoCityMoto.h"
-#include <algorithm>
-
+#include <cmath>
+#include <iostream>
 Cliente::Cliente(const Cliente& orig):
         dni(orig.dni),pass(orig.pass), nombre(orig.nombre),display(""),
         direccion(orig.direccion),rutas(orig.rutas), acceso(orig.acceso),posicion(orig.posicion){}
@@ -190,5 +189,5 @@ void Cliente::setRutas(list<Itinerario> rutaNueva) {
 
 void Cliente::mostrarMensaje(string texto){
     display=texto;
-   cout<<" El estado en el que se encuentra nuestra moto es" << display << std::endl;
+    
 };
