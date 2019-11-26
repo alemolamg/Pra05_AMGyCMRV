@@ -4,22 +4,14 @@
  * Created on 20 de septiembre de 2019, 17:17
  */  
 #ifndef CLIENTE_H
-#define CLIENTE_H
-
-#include <iostream>
+#define	CLIENTE_H
 #include <string>
-#include <algorithm>
-#include <cmath>
 #include "UTM.h"
-#include <stdlib.h>
-#include <time.h>
-#include "Itinerario.h"
-#include "EcoCityMoto.h"
+//#include "listaD.h"
 #include <list>
+#include "Itinerario.h"
 
-using namespace std;
-
-class EcoCityMoto;
+class EcoCityMoto;    
 
 class Cliente {
   

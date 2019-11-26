@@ -76,13 +76,15 @@ unsigned long THashCliente::calcPrimoMenor(unsigned long& primer) {
     return elPrimo;
 }
 
-bool THashCliente::insertar(const std::string& dni, Cliente *cli) {
+bool THashCliente::insertar(const std::string& dni, Cliente &cli) {
     unsigned int intento=0,y=0;
     bool encontrado=false;
     unsigned long clave=djb2((unsigned char*)dni.c_str());
     
     while (!encontrado) {
+        
             y=hash1(clave,intento);           
+        
             if (tabla[y].marca==VACIA || tabla[y].marca==DISPONIBLE) {                
                 tamLogico++;
                 tabla[y].dni=dni;
@@ -100,7 +102,7 @@ bool THashCliente::insertar(const std::string& dni, Cliente *cli) {
     return encontrado;
 }
 
-bool THashCliente::buscar(string& dni, Cliente*& cli) {
+bool THashCliente::buscar(string& dni, Cliente* &cli) {
     bool encontrado=false;
     unsigned long intento=0;
     unsigned long y=0, clave = djb2((unsigned char*)dni.c_str());
@@ -112,7 +114,7 @@ bool THashCliente::buscar(string& dni, Cliente*& cli) {
             cli=nullptr;
         }else                
             if(tabla[y].marca==OCUPADA && tabla[y].dni==dni){
-                cli=tabla[y].cliDatos;
+                cli=&tabla[y].cliDatos;
                 encontrado=true;
             }else
                 ++intento;
@@ -168,7 +170,7 @@ vector<string> THashCliente::getVectorDNI() {
     vector<string> vecDNI;
     int pos=0, i=0;
     bool acabado=false;
-    Cliente *cli=0;
+    Cliente *cli;
     
     while (i<tabla.size()){
         
@@ -176,7 +178,7 @@ vector<string> THashCliente::getVectorDNI() {
             cli=nullptr;
         }else                
             if(tabla[i].marca==OCUPADA ){
-                cli=tabla[i].cliDatos;
+                cli=&(tabla[i].cliDatos);
                 acabado=true;
             }
         if(cli){
@@ -187,7 +189,7 @@ vector<string> THashCliente::getVectorDNI() {
     return vecDNI;
 }
 
-bool THashCliente::borrar(std::string dni) {
+bool THashCliente::borrar(std::string& dni) {
     unsigned long clave=djb2((unsigned char*)dni.c_str());
     Cliente *cli;
     bool existe=buscar(dni,cli);
@@ -200,7 +202,7 @@ bool THashCliente::borrar(std::string dni) {
             cli=nullptr;
         }else                
             if(tabla[y].marca==OCUPADA && tabla[y].dni==dni){
-                cli=tabla[y].cliDatos;
+                cli=&tabla[y].cliDatos;
                 tabla[y].marca=DISPONIBLE;
                 existe=false;
             }else

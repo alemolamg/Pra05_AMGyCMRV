@@ -10,10 +10,9 @@
 #include "Cliente.h"
 //#include "EcoCityMoto.h"
 #include <vector>
-#include <set>
-#include <string>
 #include <iostream>
-
+#include "Cliente.h"
+#define limite 30
 
 //#define limite 20
 
@@ -30,7 +29,7 @@ private:
         unsigned long clave;
         std::string dni;
         EstadoCaja marca;
-        Cliente* cliDatos;
+        Cliente cliDatos;
         Entrada(): marca(VACIA),clave(0),dni(""),cliDatos(0){}
         //Entrada(): marca(VACIA),clave(0),dni(""){};
         ~Entrada(){};
@@ -67,10 +66,10 @@ public:
     void redispersar (unsigned tamaNuevo); //ToDo: revisar que funciona correctamente
     unsigned int numClientes();
     bool esprimo(unsigned long& n);
-    bool insertar(const std::string& dni,Cliente *cli);
+    bool insertar(const std::string& dni,Cliente& cli);
     bool buscar (string &dni, Cliente* &cli);
     
-    bool borrar(std::string dni);
+    bool borrar(std::string& dni);
     
     
     //---Funciones-Extra----//
