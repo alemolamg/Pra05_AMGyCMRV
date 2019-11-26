@@ -23,7 +23,6 @@ class EcoCityMoto;
 
 class Cliente {
   
-    std::string display;
     std::string dni;
     std::string pass;
     std::string nombre;
