@@ -102,7 +102,7 @@ bool THashCliente::insertar(const std::string& dni, Cliente &cli) {
     return encontrado;
 }
 
-bool THashCliente::buscar(string& dni, Cliente& cli) {
+bool THashCliente::buscar(string& dni, Cliente* &cli) {
     bool encontrado=false;
     unsigned long intento=0;
     unsigned long y=0, clave = djb2((unsigned char*)dni.c_str());
@@ -114,7 +114,7 @@ bool THashCliente::buscar(string& dni, Cliente& cli) {
             cli=nullptr;
         }else                
             if(tabla[y].marca==OCUPADA && tabla[y].dni==dni){
-                cli=tabla[y].cliDatos;
+                cli=&tabla[y].cliDatos;
                 encontrado=true;
             }else
                 ++intento;
@@ -189,7 +189,7 @@ vector<string> THashCliente::getVectorDNI() {
     return vecDNI;
 }
 
-bool THashCliente::borrar(std::string dni) {
+bool THashCliente::borrar(std::string& dni) {
     unsigned long clave=djb2((unsigned char*)dni.c_str());
     Cliente *cli;
     bool existe=buscar(dni,cli);
@@ -202,7 +202,7 @@ bool THashCliente::borrar(std::string dni) {
             cli=nullptr;
         }else                
             if(tabla[y].marca==OCUPADA && tabla[y].dni==dni){
-                cli=tabla[y].cliDatos;
+                cli=&tabla[y].cliDatos;
                 tabla[y].marca=DISPONIBLE;
                 existe=false;
             }else
