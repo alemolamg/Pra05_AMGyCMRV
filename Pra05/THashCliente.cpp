@@ -76,7 +76,7 @@ unsigned long THashCliente::calcPrimoMenor(unsigned long& primer) {
     return elPrimo;
 }
 
-bool THashCliente::insertar(const std::string& dni, Cliente *cli) {
+bool THashCliente::insertar(const std::string& dni, Cliente &cli) {
     unsigned int intento=0,y=0;
     bool encontrado=false;
     unsigned long clave=djb2((unsigned char*)dni.c_str());
@@ -102,7 +102,7 @@ bool THashCliente::insertar(const std::string& dni, Cliente *cli) {
     return encontrado;
 }
 
-bool THashCliente::buscar(string& dni, Cliente*& cli) {
+bool THashCliente::buscar(string& dni, Cliente& cli) {
     bool encontrado=false;
     unsigned long intento=0;
     unsigned long y=0, clave = djb2((unsigned char*)dni.c_str());
@@ -170,7 +170,7 @@ vector<string> THashCliente::getVectorDNI() {
     vector<string> vecDNI;
     int pos=0, i=0;
     bool acabado=false;
-    Cliente *cli=0;
+    Cliente *cli;
     
     while (i<tabla.size()){
         
@@ -178,7 +178,7 @@ vector<string> THashCliente::getVectorDNI() {
             cli=nullptr;
         }else                
             if(tabla[i].marca==OCUPADA ){
-                cli=tabla[i].cliDatos;
+                cli=&(tabla[i].cliDatos);
                 acabado=true;
             }
         if(cli){

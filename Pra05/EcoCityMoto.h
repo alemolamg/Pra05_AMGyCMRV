@@ -46,7 +46,7 @@ public:
     void desbloqueaMoto(Moto *moto, Cliente *cli);   
     
     bool nuevoCliente(Cliente& nuevoCli);
-    Cliente* buscarCliente(string dni);
+    Cliente buscarCliente(string dni);
 
     vector<Moto>& getMotos();
     bool eliminarCliente(std::string borrameid);

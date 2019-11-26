@@ -66,8 +66,8 @@ public:
     void redispersar (unsigned tamaNuevo); //ToDo: revisar que funciona correctamente
     unsigned int numClientes();
     bool esprimo(unsigned long& n);
-    bool insertar(const std::string& dni,Cliente *cli);
-    bool buscar (string &dni, Cliente* &cli);
+    bool insertar(const std::string& dni,Cliente& cli);
+    bool buscar (string &dni, Cliente& cli);
     
     bool borrar(std::string dni);
     
