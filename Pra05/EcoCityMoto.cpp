@@ -277,11 +277,15 @@ Moto* EcoCityMoto::LocMotoCercana(UTM& ubicacion) {
 }
 
 void EcoCityMoto::crearItinerarios(int num, const UTM& min, const UTM& max) {
-    map<string,Cliente>::iterator iterador=clientes.begin();
-    while (iterador!=clientes.end()) {
-        iterador->second.crearItinerario(num,idUltimo,min,max);
+    vector<string> vectorClientes= clientes.getVectorDNI();
+    Cliente *aux;
+    int i=0;
+    while (i<vectorClientes.size()) {
+    //while (i<clientes.getVectorDNI().size()) {
+        bool nada=clientes.buscar(vectorClientes[i],aux);
+        aux->crearItinerario (num,idUltimo,min,max);
         idUltimo=idUltimo+num;
-        ++iterador;
+        ++i;
     }
 }
 
@@ -292,10 +296,12 @@ void EcoCityMoto::guardarClientesItinerarios(const string& fileName) {
     
     
     if(fs.good()){
-        map<string,Cliente>::iterator it=clientes.begin();
+        //map<string,Cliente>::iterator it=clientes.begin();
+        vector<string> vectorClientes= clientes.getVectorDNI();
+        int i=0;
         fs << "2;NIF;clave;nomape;dirección;latitud;longitud;nIti;bajar_linea;id;inicioLat;inicioLon;finLat;finLon;dia;mes;anio;hora;minuto;minutos;moto" << endl;
-        while (it!=clientes.end()){
-            Cliente cli=it->second;
+        while (i<vectorClientes.size()){
+            Cliente cli= vectorClientes[i];
            // if (cli.GetDni()=="52525252X")
              //   cout << ",";
             list<Itinerario> r=cli.getRutas();
@@ -312,7 +318,7 @@ void EcoCityMoto::guardarClientesItinerarios(const string& fileName) {
                    it2->GetMinutos() <<";"<< it2->GetVehiculo()->getId() << endl;
                 it2++;
             }
-            it++;
+            i++;
         }
     
         fs.close(); //Cerramos el flujo de entrada        
@@ -328,8 +334,8 @@ bool EcoCityMoto::nuevoCliente(Cliente& nuevoCli) {
 }
 
 bool EcoCityMoto::eliminarCliente(std::string borrameid) {//ToDo: Arreglar THashCliente, falta borrar();
-    return clientes.erase(borrameid);
-    //return clientes.borra;
+    //return clientes.erase(borrameid);
+    return clientes.borrar(borrameid);
     
 }
 

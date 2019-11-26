@@ -102,7 +102,7 @@ bool THashCliente::insertar(const std::string& dni, Cliente *cli) {
 
 bool THashCliente::buscar(string& dni, Cliente*& cli) {
     bool encontrado=false;
-    int intento=0;
+    unsigned long intento=0;
     unsigned long y=0, clave = djb2((unsigned char*)dni.c_str());
     
     while (!encontrado){
@@ -115,7 +115,7 @@ bool THashCliente::buscar(string& dni, Cliente*& cli) {
                 cli=tabla[y].cliDatos;
                 encontrado=true;
             }else
-                ++i;
+                ++intento;
     }
     return encontrado;   
 }
@@ -164,4 +164,54 @@ unsigned int THashCliente::tamaTabla() {
     return tamFisico;
 }
 
+vector<string> THashCliente::getVectorDNI() {
+    vector<string> vecDNI;
+    int pos=0, i=0;
+    bool acabado=false;
+    Cliente *cli=0;
+    
+    while (i<tabla.size()){
+        
+        if(tabla[i].marca==VACIA || tabla[i].marca==DISPONIBLE){
+            cli=nullptr;
+        }else                
+            if(tabla[i].marca==OCUPADA ){
+                cli=tabla[i].cliDatos;
+                acabado=true;
+            }
+        if(cli){
+            vecDNI[pos]=cli->GetDni();
+        }
+        ++i;
+    }
+    return vecDNI;
+}
+
+bool THashCliente::borrar(std::string dni) {
+    unsigned long clave=djb2((unsigned char*)dni.c_str());
+    Cliente *cli;
+    bool existe=buscar(dni,cli);
+    unsigned long y=0,intento=0;
+    
+    while(existe){
+        unsigned long y=hash1(clave,intento);
+        
+        if(tabla[y].marca==VACIA || tabla[y].marca==DISPONIBLE){// No deberia entrar
+            cli=nullptr;
+        }else                
+            if(tabla[y].marca==OCUPADA && tabla[y].dni==dni){
+                cli=tabla[y].cliDatos;
+                tabla[y].marca=DISPONIBLE;
+                existe=false;
+            }else
+                ++intento;
+    }
+    //return !existe; //ToDo: preguntar si hace falta devolver true o false
+    //lo siente es para comprobar que funciona
+    existe=buscar(dni,cli);
+    if (existe)
+        throw invalid_argument ("THashCliente::borrar: no borrado correctamente");
+    else
+        return true;
+}
 

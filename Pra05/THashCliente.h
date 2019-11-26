@@ -70,6 +70,8 @@ public:
     bool insertar(const std::string& dni,Cliente *cli);
     bool buscar (string &dni, Cliente* &cli);
     
+    bool borrar(std::string dni);
+    
     
     //---Funciones-Extra----//
     unsigned int maxColisiones();
@@ -77,6 +79,7 @@ public:
     float promedioColisiones();
     float factorCarga();
     unsigned int tamaTabla();
+    vector<string> getVectorDNI();
 
 };
 #endif /* THASHCLIENTE_H */
