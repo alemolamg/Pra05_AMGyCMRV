@@ -244,8 +244,8 @@ void EcoCityMoto::SetIdUltimo(unsigned nuevoIdUltimo){
 }
 
 
-Cliente EcoCityMoto::buscarCliente(string dni){//ToDo: Cambiar al final de la hash
-    Cliente elCliente;
+Cliente* EcoCityMoto::buscarCliente(string dni){//ToDo: Cambiar al final de la hash
+    Cliente *elCliente;
     bool encontrado=false;
     encontrado=clientes.buscar(dni,elCliente);
     //it=clientes.find(dni);
@@ -281,12 +281,12 @@ Moto* EcoCityMoto::LocMotoCercana(UTM& ubicacion) {
 
 void EcoCityMoto::crearItinerarios(int num, const UTM& min, const UTM& max) {
     vector<string> vectorClientes= clientes.getVectorDNI();
-    Cliente aux;
+    Cliente *aux;
     int i=0;
     while (i<vectorClientes.size()) {
     //while (i<clientes.getVectorDNI().size()) {
         bool nada=clientes.buscar(vectorClientes[i],aux);
-        aux.crearItinerario (num,idUltimo,min,max);
+        aux->crearItinerario (num,idUltimo,min,max);
         idUltimo=idUltimo+num;
         ++i;
     }

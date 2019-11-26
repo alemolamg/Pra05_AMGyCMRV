@@ -67,9 +67,9 @@ public:
     unsigned int numClientes();
     bool esprimo(unsigned long& n);
     bool insertar(const std::string& dni,Cliente& cli);
-    bool buscar (string &dni, Cliente& cli);
+    bool buscar (string &dni, Cliente* &cli);
     
-    bool borrar(std::string dni);
+    bool borrar(std::string& dni);
     
     
     //---Funciones-Extra----//
