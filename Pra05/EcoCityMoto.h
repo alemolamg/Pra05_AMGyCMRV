@@ -6,14 +6,13 @@
 #ifndef ECOCITYMOTO_H
 #define ECOCITYMOTO_H
 
-#include <algorithm>
-#include "Cliente.h"
-#include "Moto.h"
-#include <vector>
-#include <map>
+//#include "Avl.h"
+//#include <map>
+//#include "Vdinamico.h"
 #include "THashCliente.h"
-#include<stdlib.h>
-#include<time.h>
+#include <vector>
+#include "Moto.h"
+#include "Cliente.h"
 
 using namespace std;
 

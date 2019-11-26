@@ -82,7 +82,9 @@ bool THashCliente::insertar(const std::string& dni, Cliente *cli) {
     unsigned long clave=djb2((unsigned char*)dni.c_str());
     
     while (!encontrado) {
+        
             y=hash1(clave,intento);           
+        
             if (tabla[y].marca==VACIA || tabla[y].marca==DISPONIBLE) {                
                 tamLogico++;
                 tabla[y].dni=dni;

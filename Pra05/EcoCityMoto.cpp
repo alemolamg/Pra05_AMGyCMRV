@@ -6,6 +6,8 @@
  */
 #include <fstream>
 #include <sstream>
+#include <iostream>
+#include <algorithm>
 #include "EcoCityMoto.h"
 
 EcoCityMoto::EcoCityMoto(const EcoCityMoto& orig):
@@ -13,6 +15,7 @@ EcoCityMoto::EcoCityMoto(const EcoCityMoto& orig):
 
 
 EcoCityMoto::~EcoCityMoto() {
+    
     guardarClientesItinerarios("prueba.txt");
     std::cout<<"Guardado archivo correctamente"<<std::endl;
 }

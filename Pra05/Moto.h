@@ -7,10 +7,9 @@
 #ifndef MOTO_H
 #define MOTO_H
 #include "UTM.h"
-//#include "Cliente.h"
-#include <iostream>
-using namespace std;
+#include <string>
 
+using namespace std;
 class Cliente; 
 
 enum tipoEstado{Bloqueado,Activo,SinBateria,Rota};

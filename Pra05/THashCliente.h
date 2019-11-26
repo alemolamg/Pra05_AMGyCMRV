@@ -10,10 +10,9 @@
 #include "Cliente.h"
 //#include "EcoCityMoto.h"
 #include <vector>
-#include <set>
-#include <string>
 #include <iostream>
-
+#include "Cliente.h"
+#define limite 30
 
 //#define limite 20
 
@@ -30,7 +29,7 @@ private:
         unsigned long clave;
         std::string dni;
         EstadoCaja marca;
-        Cliente* cliDatos;
+        Cliente cliDatos;
         Entrada(): marca(VACIA),clave(0),dni(""),cliDatos(0){}
         //Entrada(): marca(VACIA),clave(0),dni(""){};
         ~Entrada(){};
