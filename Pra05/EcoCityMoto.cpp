@@ -180,9 +180,13 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
                     //con todos los atributos leídos, se crea el cliente
                     Cliente client (dni, nombre, pass, direccion,dlat, dlon, this);
                     clientes.insertar(dni,client); 
-                    //obtengo un iterador al cliente insertado para asignarle los itinerarios
-                    //clientes.buscar(dni,client);
-                    //map<string,Cliente>::iterator itCli= clientes.find(dni);
+                    bool inserto=clientes.insertar(dni,client);
+                    if (!inserto){
+                        std::cout << "No insertado" ;                       
+                    }
+                    
+                    Cliente *pClient=0;
+                    clientes.buscar(dni,pClient);
                     string nIti,mot;
                     int id,dia,mes,anio,hora,min,minutos;
                     float iniLat,finLat,iniLon,finLon;
@@ -190,20 +194,20 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
               
                     for (int i=0; i<stoi(nIti); i++){
                         getline(fe, linea);
-                        stringstream ss_;
-                        ss_ << linea;
-                        ss_ >> id; ss_.ignore(1);
-                        ss_ >> iniLat; ss_.ignore(1);
-                        ss_ >> iniLon; ss_.ignore(1);
-                        ss_ >> finLat; ss_.ignore(1);
-                        ss_ >> finLon; ss_.ignore(1);
-                        ss_ >> dia; ss_.ignore(1);
-                        ss_ >> mes; ss_.ignore(1);
-                        ss_ >> anio; ss_.ignore(1);
-                        ss_ >> hora; ss_.ignore(1);
-                        ss_ >> min; ss_.ignore(1);
-                        ss_ >> minutos; ss_.ignore(1);
-                        ss_ >> mot;
+                        stringstream ss3;
+                        ss3 << linea;
+                        ss3 >> id; ss3.ignore(1);
+                        ss3 >> iniLat; ss3.ignore(1);
+                        ss3 >> iniLon; ss3.ignore(1);
+                        ss3 >> finLat; ss3.ignore(1);
+                        ss3 >> finLon; ss3.ignore(1);
+                        ss3 >> dia; ss3.ignore(1);
+                        ss3 >> mes; ss3.ignore(1);
+                        ss3 >> anio; ss3.ignore(1);
+                        ss3 >> hora; ss3.ignore(1);
+                        ss3 >> min; ss3.ignore(1);
+                        ss3 >> minutos; ss3.ignore(1);
+                        ss3 >> mot;
                         //vector<Moto>::iterator itMoto=find(motos.begin(),motos.end(),mot);
                         vector<Moto>::iterator itMoto=motos.begin();
                         while (itMoto!=motos.end()){
@@ -213,17 +217,19 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
                             itMoto++;
                         }
                         Itinerario iti(id,UTM(iniLat,iniLon),UTM(finLat,finLon),Fecha(dia,mes,anio,hora,min),minutos,&(*itMoto));;
-                        //ToDo: Crear iterador y añadirlo a cliente.
-                        //itCli->second.cargaItinerario(iti);   //agregamos itinerario al cliente                                  
-                    }                                                               
+                        pClient->cargaItinerario(iti);
+                    }                                                        
                 }              
                 getline(fe, linea);     //Toma una línea del fichero
             }
         }
-        
         std::cout<<"Total de clientes en el fichero: " << total <<endl;
-        fe.close(); //Cerramos el flujo de entrada        
-    }else{
+        std::cout << "Tamaño tablaHash: " << clientes.numClientes() << std::endl;
+        std::cout << "Factor de Carga tablaHash: " << clientes.factorCarga() << std::endl;
+        std::cout << "Maximo de Colisiones en la tablaHash: " << clientes.maxColisiones() << std::endl;
+        std::cout << "Promedio de Colisiones en la tablaHash: " << clientes.promedioColisiones() << std::endl;
+               
+        fe.close(); //Cerramos el flujo de entrada }else{
         std::cerr<<"No se puede abrir el fichero"<<endl;
     }    
 }
