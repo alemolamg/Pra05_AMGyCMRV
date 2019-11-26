@@ -9,33 +9,9 @@
 #include "Cliente.h"
 #include "Moto.h"
 #include "EcoCityMoto.h"
-#define total 17369
-
-void calcularPrimos(int num){
-    int divisor = 1, divisores = 0;
-
-    do{
-        if(num % divisor == 0){
-            divisores++;
-        }
-    divisor++;
-    }while(divisor <= num);
-    if(divisores == 2){
-        cout<<"n-> El numero "<<num<<" es PRIMO.";
-    }else{
-        cout<<"n-> El numero "<<num<<" NO es PRIMO.";
-    }
-}
-
-
-
-
 
 int main(){    
-    int primo=20;
     
-    calcularPrimos(primo);
-   /*
     setlocale(LC_ALL,"es_ES.UTF8"); 
     srand(time(0));
      try{ 
@@ -74,15 +50,15 @@ int main(){
 
              
              //4) Localizar las motos sin batería e indicar si la moto utilizada está en esa situación.
-             vector<Moto*> v=eco.localizaMotosSinBateria();             
-             vector<Moto*>::iterator itMoto=v.begin();
+             /*vector<Moto> v=eco.localizaMotosSinBateria();             
+             vector<Moto>::iterator itMoto=v.begin();
              while (itMoto!=v.end()){
-                 if ((*(itMoto))->getId() == m->getId()){
+                 if ((itMoto)->getId()==m->getId()){
                      cout << "la moto Utilizada quedo sin bateria"<<endl;
                      break;
                  }
                  itMoto++;
-             }
+             }*/
          
              //5) Borrar el cliente que se insertó en el punto 1 
             if (eco.eliminarCliente(cliente.GetDni()))
@@ -102,6 +78,6 @@ int main(){
      } 
      
      
-    return 0;  */
+    return 0;
     
 }

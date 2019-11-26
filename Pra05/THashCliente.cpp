@@ -208,12 +208,12 @@ bool THashCliente::borrar(std::string& dni) {
             }else
                 ++intento;
     }
-    //return !existe; //ToDo: preguntar si hace falta devolver true o false
-    //lo siente es para comprobar que funciona
+    return !existe; //ToDo: preguntar si hace falta devolver true o false
+    /*//lo siente es para comprobar que funciona
     existe=buscar(dni,cli);
     if (existe)
         throw invalid_argument ("THashCliente::borrar: no borrado correctamente");
     else
-        return true;
+        return true;*/
 }
 
