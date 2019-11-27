@@ -301,6 +301,19 @@ void EcoCityMoto::crearItinerarios(int num, const UTM& min, const UTM& max) {
     }
 }
 
+vector<string> EcoCityMoto::getVecDNICli() {
+    return clientes.getVectorDNI();
+}
+
+
+bool EcoCityMoto::proPracticaClientes() {
+    bool caye=true;
+    cout<<"Esta practica ha sido realizada por:";
+    if (caye)
+        cout<<"Cayetano y Alemol"<<std::endl;
+    return caye;
+}
+
 void EcoCityMoto::guardarClientesItinerarios(const string& fileName) {
      ofstream fs;                    //Flujo de salida
     //Asociamos el flujo al fichero 
@@ -359,3 +372,8 @@ vector<Moto*> EcoCityMoto::localizaMotosSinBateria() {
         return vecMotos;
 }
 
+void EcoCityMoto::redispersarClientes(unsigned long tamTablaNuevo) {//ToDo: Borrar couts
+    cout << " Factor de Carga primero: " << clientes.factorCarga() << endl;
+    clientes.redispersar(tamTablaNuevo);
+    cout << " Factor de Carga Despues: " << clientes.factorCarga() << endl;
+}

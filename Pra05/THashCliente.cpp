@@ -151,13 +151,15 @@ float THashCliente::factorCarga() {
     return (float) tamLogico/tamFisico;
 }
 
-void THashCliente::redispersar(unsigned tamaNuevo) {
-    vector<Entrada> nueva(tamaNuevo,Entrada());
-    tamFisico=tamaNuevo;
+void THashCliente::redispersar(unsigned long tamNuevo) {
+    vector<Entrada> nueva(tamNuevo,Entrada());
+    tamFisico=calcPrimo(tamNuevo);
+    //tamFisico=tamNuevo;
     
     for (int i=0; i<tabla.size(); i++){       
-        unsigned posNueva=0, intento=0;
         bool encontrado = false;
+        unsigned posNueva=0, intento=0;
+        
         if (tabla[i].marca==OCUPADA){
             unsigned long clave=djb2((unsigned char*)tabla[i].dni.c_str());
             //bool insertCliente=insertarEnNueva(nueva,tabla[i].dni,tabla[i].cliDatos);
@@ -168,6 +170,7 @@ void THashCliente::redispersar(unsigned tamaNuevo) {
                 nueva[posNueva].dni=tabla[i].dni;
                 nueva[posNueva].clave=clave;
                 nueva[posNueva].cliDatos=tabla[i].cliDatos;
+                nueva[posNueva].marca=OCUPADA;
                 encontrado = true;   //Encontre un sitio libre  
             }else               
                 ++intento;   //No he dado aun con una posicion libre
@@ -175,10 +178,8 @@ void THashCliente::redispersar(unsigned tamaNuevo) {
     
     totalColisiones+=intento;
     if(intento>maxCol)
-        maxCol=intento;
-    //return encontrado;    
+        maxCol=intento;    
         }
-    
     }
     tabla=nueva;
 }

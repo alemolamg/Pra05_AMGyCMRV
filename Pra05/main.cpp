@@ -39,6 +39,21 @@ unsigned long calPrimoCercanoMayor (unsigned long num){
         return elPrimo;
 }
 
+unsigned long borrar1000Clientes(EcoCityMoto& eco){
+    vector<string> vecDNI = eco.getVecDNICli();
+    unsigned long paso=0, tam=eco.getVecDNICli().size(),borralos=1000;
+    for(int i=0;i<borralos;i++){
+        paso=tam-i;
+        Cliente *cli= eco.buscarCliente(vecDNI[paso]);
+        //bool borrado =eco.eliminarCliente(cli.GetDni();
+        if (eco.eliminarCliente(cli->GetDni()))//ToDo:Cambiar por la linea de arriba
+           cout << "Borrando cliente: " << cli->GetDni() << endl; 
+        else
+            cout<<"Error al borrar cliente num: "<<paso;
+    }
+    return paso;    
+}
+
 int main(){    
     unsigned long primo,numero=10000;
     /*primo=calPrimoCercanoMayor(numero);
@@ -55,7 +70,7 @@ int main(){
         //EcoCityMoto eco("prueba.txt","motos2.txt",numero);  
     
         //1) Añadir a la empresa un nuevo cliente que no exista previamente
-        Cliente cliente("50617459W", "Pepito Hernandez" , "passph", "Universidad", 37.5, 3.5, &eco);
+        Cliente cliente("51617459W", "Pepito Hernandez" , "passph", "Universidad", 37.5, 3.5, &eco);
         
         //2) Localizar el cliente anterior en la empresa por su DNI y buscar una moto cercana
         if (!eco.nuevoCliente(cliente))
@@ -94,9 +109,13 @@ int main(){
              }*/
          
              //5) Borrar el cliente que se insertó en el punto 1 
-            if (eco.eliminarCliente(cliente.GetDni()))
-                 cout << "Borrando cliente: " << cliente.GetDni() << endl;            
-            Cliente* cliente2=eco.buscarCliente(cliente.GetDni()); //comprobación
+             
+             unsigned long nuevoTam= borrar1000Clientes(eco);
+             eco.redispersarClientes(nuevoTam);
+             
+             
+            //if (eco.eliminarCliente(cliente.GetDni()))                 
+            //Cliente* cliente2=eco.buscarCliente(cliente.GetDni()); //comprobación
             
     
      //Tratamiento de errores
