@@ -21,7 +21,6 @@ private:
     unsigned idUltimo;
     vector <Moto> motos;
     THashCliente clientes;
-
     vector<string> dniClientes;
     
     //---FUNCIONES----------//
@@ -35,7 +34,7 @@ private:
 
     
 public:
-    EcoCityMoto(const string &fileClientes,const string &fileMotos);
+    EcoCityMoto(const string &fileClientes,const string &fileMotos,unsigned long tamTabla );
     EcoCityMoto(const EcoCityMoto& orig);
     
     unsigned GetIdUltimo() const;

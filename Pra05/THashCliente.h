@@ -24,14 +24,13 @@ class THashCliente {
 private:
     //friend class Entrada;
     class Entrada{
-        friend class Cliente;
     public:
         unsigned long clave;
         std::string dni;
         EstadoCaja marca;
         Cliente cliDatos;
-        Entrada(): marca(VACIA),clave(0),dni(""),cliDatos(0){}
-        //Entrada(): marca(VACIA),clave(0),dni(""){};
+        //-----Funciones----//
+        Entrada(): marca(VACIA),clave(0),dni(""),cliDatos(Cliente()){}
         ~Entrada(){};
     };
     
@@ -59,8 +58,8 @@ public:
         return hash;
     }
     //-----Funciones--THash--------//
-    THashCliente(unsigned long tamTabla=1);
-    THashCliente(const THashCliente& orig); //ToDo: preguntar organización
+    THashCliente(unsigned long tamTabla=20);
+    THashCliente(const THashCliente& orig); 
     virtual ~THashCliente();
     
     void redispersar (unsigned tamaNuevo); //ToDo: revisar que funciona correctamente

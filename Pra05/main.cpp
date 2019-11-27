@@ -10,16 +10,49 @@
 #include "Moto.h"
 #include "EcoCityMoto.h"
 
+
+bool numEsPrimo(unsigned long& num) {
+        for (unsigned i = 2; i <= num/2; i++)
+            if (num % i == 0)
+                return false;
+        return true;
+}
+
+unsigned long calPrimoCercanoMayor (unsigned long num){
+    
+        unsigned long elPrimo=num;
+    
+        bool encontrado=false;
+        do{
+            ++elPrimo;
+            bool wanda=numEsPrimo(elPrimo);
+            if(wanda){
+                float comparo =(float) num/elPrimo ;
+                if(comparo>=0.60 && comparo<=0.66 )
+                 encontrado=true;
+                /*else
+                    if(comparo>=0.70)
+                        --elPrimo;*/     
+            }   
+            
+        }while(!encontrado);
+        return elPrimo;
+}
+
 int main(){    
+    unsigned long primo,numero=25;
+    /*primo=calPrimoCercanoMayor(numero);
+    std::cout<<"el primo es: "<<primo<<std::endl;*/
+    
     
     setlocale(LC_ALL,"es_ES.UTF8"); 
     srand(time(0));
      try{ 
         //0)creamos estructura y se cargan clientes y motos dentro
         cout << "Creando Eco.... Comienzo de lectura de ficheros " << endl;   
-        //EcoCityMoto eco("clientes_v2.csv","motos.txt"); 
-        //EcoCityMoto eco("clientes_v5.csv","motos2.txt"); 
-        EcoCityMoto eco("prueba.txt","motos2.txt");  
+        EcoCityMoto eco("clientes_v2.csv","motos.txt",numero); 
+        //EcoCityMoto eco("clientes_v5.csv","motos2.txt",numero); 
+        //EcoCityMoto eco("prueba.txt","motos2.txt",numero);  
     
         //1) Añadir a la empresa un nuevo cliente que no exista previamente
         Cliente cliente("50617459W", "Pepito Hernandez" , "passph", "Universidad", 37.5, 3.5, &eco);
