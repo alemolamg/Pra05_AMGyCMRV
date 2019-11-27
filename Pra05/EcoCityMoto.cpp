@@ -359,3 +359,16 @@ vector<Moto*> EcoCityMoto::localizaMotosSinBateria() {
         return vecMotos;
 }
 
+vector<string> EcoCityMoto::getDniDeLosClientes(){
+    return clientes.getVectorDNI();
+}
+
+void EcoCityMoto::borraTodosLosClientes(){
+    vector<string> vectorDeClientes=getDniDeLosClientes();
+    for(int i=0;i<1000;i++){
+        clientes.borrar(vectorDeClientes[i]);
+        i++;
+    }
+    cout<<"Todos los clientes han sido eliminados"<<std::endl;
+}
+
