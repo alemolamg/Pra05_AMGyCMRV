@@ -321,19 +321,18 @@ void EcoCityMoto::guardarClientesItinerarios(const string& fileName) {
     
     
     if(fs.good()){
-        //map<string,Cliente>::iterator it=clientes.begin();
-        vector<string> vectorClientes= clientes.getVectorDNI();
-        int i=0;
-        fs << "2;NIF;clave;nomape;dirección;latitud;longitud;nIti;bajar_linea;id;inicioLat;inicioLon;finLat;finLon;dia;mes;anio;hora;minuto;minutos;moto" << endl;
-        while (i<vectorClientes.size()){
-            Cliente cli= vectorClientes[i];
-           // if (cli.GetDni()=="52525252X")
-             //   cout << ",";
-            list<Itinerario> r=cli.getRutas();
+        vector<string> vecCli=getVecDNICli();
+        Cliente* pclient;
+        fs << "NIF;clave;nomape;dirección;latitud;longitud;nIti" << endl;
+        int i=0; 
+        while (i<vecCli.size()){            
+            bool p=clientes.buscar(vecCli[i],pclient);
+            
+            list<Itinerario> r=pclient->getRutas();
             list<Itinerario>::iterator it2=r.begin();
-            fs << cli.GetDni() <<";"<< cli.GetPass() <<";"<< cli.GetNombre() <<";"<<
-                  cli.GetDireccion() <<";"<< cli.getPosicion().GetLatitud() <<";"<<
-                  cli.getPosicion().GetLongitud() <<";"<< cli.getRutas().size() << endl;
+            fs << pclient->GetDni() <<";"<< pclient->GetPass() <<";"<< pclient->GetNombre() <<";"<<
+                  pclient->GetDireccion() <<";"<< pclient->getPosicion().GetLatitud() <<";"<<
+                  pclient->getPosicion().GetLongitud() <<";"<< pclient->getRutas().size() << endl;
             while (it2!=r.end()){
                 fs << it2->GetId() <<";"<< it2->GetInicio().GetLatitud() <<";"<<
                    it2->GetInicio().GetLongitud() <<";"<< it2->GetFin().GetLatitud() <<";"<<
@@ -343,10 +342,9 @@ void EcoCityMoto::guardarClientesItinerarios(const string& fileName) {
                    it2->GetMinutos() <<";"<< it2->GetVehiculo()->getId() << endl;
                 it2++;
             }
-            i++;
-        }
-    
-        fs.close(); //Cerramos el flujo de entrada        
+            i++;            
+        }    
+        fs.close(); //Cerramos el flujo de entrada         
     }else{
         std::cerr<<"No se puede crear el fichero"<<endl;
     } 
