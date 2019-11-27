@@ -9,6 +9,7 @@
 #include "Cliente.h"
 #include "THashCliente.h"
 
+
 THashCliente::THashCliente(unsigned long tamTabla):
     tamFisico(THashCliente::calcPrimo(tamTabla)),tamLogico(0),totalColisiones(0),
     //tamFisico(tamTabla),tamLogico(0),totalColisiones(0),
@@ -211,6 +212,7 @@ vector<string> THashCliente::getVectorDNI() {
     }
     return vecDNI;
 }
+
 
 bool THashCliente::borrar(std::string& dni) {
     unsigned long clave=djb2((unsigned char*)dni.c_str());

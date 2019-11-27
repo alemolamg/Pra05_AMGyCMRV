@@ -31,9 +31,8 @@ private:
         Cliente cliDatos;
         //-----Funciones----//
         Entrada(): marca(VACIA),clave(0),dni(""),cliDatos(Cliente()){}
-        ~Entrada(){};
+        ~Entrada(){}
     };
-    
     unsigned long tamFisico;
     unsigned long tamLogico;
     unsigned long totalColisiones;

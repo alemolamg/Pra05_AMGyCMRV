@@ -23,6 +23,7 @@ private:
     THashCliente clientes;
     vector<string> dniClientes;
     
+    
     //---FUNCIONES----------//
     void cargarMotos(string fileNameMotos);
     void cargarClientes(const string &fileNameClientes);
@@ -34,7 +35,7 @@ private:
 
     
 public:
-    EcoCityMoto(const string &fileClientes,const string &fileMotos,unsigned long tamTabla );
+    EcoCityMoto(const string &fileClientes,const string &fileMotos,unsigned long tamTabla);
     EcoCityMoto(const EcoCityMoto& orig);
     
     unsigned GetIdUltimo() const;
@@ -49,6 +50,8 @@ public:
 
     vector<Moto>& getMotos();
     bool eliminarCliente(std::string borrameid);
+    vector<string> getDniDeLosClientes();
+    void borraTodosLosClientes();
     
     virtual ~EcoCityMoto();
           

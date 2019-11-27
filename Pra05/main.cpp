@@ -48,6 +48,23 @@ int main(){
     setlocale(LC_ALL,"es_ES.UTF8"); 
     srand(time(0));
      try{ 
+         int p;
+         
+         cout<<"Elige un modo: 1 Para entrenar y 2 Para hacer ejercicio completo";
+         cin>>p;
+         
+         if(p==1){
+             int tam[]={16890,16230};
+             
+             for(int i=0;i<2;i++){
+                 for(int j=0;j<3;j++){
+                     
+                 }
+             }
+             
+             
+         }else
+         {
         //0)creamos estructura y se cargan clientes y motos dentro
         cout << "Creando Eco.... Comienzo de lectura de ficheros " << endl;   
         EcoCityMoto eco("clientes_v2.csv","motos.txt",numero); 
@@ -94,10 +111,8 @@ int main(){
              }*/
          
              //5) Borrar el cliente que se insertó en el punto 1 
-            if (eco.eliminarCliente(cliente.GetDni()))
-                 cout << "Borrando cliente: " << cliente.GetDni() << endl;            
-            Cliente* cliente2=eco.buscarCliente(cliente.GetDni()); //comprobación
-            
+            eco.borraTodosLosClientes(); //comprobación
+         };
     
      //Tratamiento de errores
      }catch (ErrorFechaIncorrecta &e){
@@ -110,7 +125,7 @@ int main(){
             std::cerr << e.what() << std::endl;
      } 
      
-     
+    
     return 0;
     
 }
