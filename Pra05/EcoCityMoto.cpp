@@ -233,7 +233,7 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
         std::cout << "Promedio de Colisiones en la tablaHash: " << clientes.promedioColisiones() << std::endl;
                
         fe.close(); //Cerramos el flujo de entrada }else{
-        std::cerr<<"No se puede abrir el fichero"<<endl;
+        //std::cerr<<"No se puede abrir el fichero"<<endl;
     }    
 }
 

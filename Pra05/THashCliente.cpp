@@ -104,16 +104,16 @@ bool THashCliente::insertar(const std::string& dni, Cliente &cli) {
         
             if (tabla[y].marca==VACIA || tabla[y].marca==DISPONIBLE) {                
                 tamLogico++;
-                tabla[y].dni=dni;
-                tabla[y].clave=clave;                             
-                tabla[y].cliDatos=cli;  //push_back(dato);                                                
-                tabla[y].marca=OCUPADA;
+                this->tabla[y].dni=dni;
+                this->tabla[y].clave=clave;                             
+                this->tabla[y].cliDatos=cli;  //push_back(dato);                                                
+                this->tabla[y].marca=OCUPADA;
                 encontrado = true;   //Encontre un sitio libre  
             }else               
                 ++intento;   //No he dado aun con una posicion libre
         }
     
-    totalColisiones+=intento;
+    totalColisiones= totalColisiones+intento;
     if(intento>maxCol)
         maxCol=intento;
     return encontrado;
@@ -189,7 +189,8 @@ vector<string> THashCliente::getVectorDNI() {
     bool acabado=false;
     Cliente *cli;
     
-    while (i<tabla.size()){
+    //while (i<tabla.size()){
+    while (i<tamFisico){
         
         if(tabla[i].marca==VACIA || tabla[i].marca==DISPONIBLE){
             cli=nullptr;
@@ -199,7 +200,8 @@ vector<string> THashCliente::getVectorDNI() {
                 acabado=true;
             }
         if(cli){
-            vecDNI[pos]=cli->GetDni();
+            vecDNI.push_back(cli->GetDni());
+            ++pos;
         }
         ++i;
     }
