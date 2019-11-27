@@ -39,88 +39,58 @@ unsigned long calPrimoCercanoMayor (unsigned long num){
         return elPrimo;
 }
 
-unsigned long borrar1000Clientes(EcoCityMoto& eco){
-    vector<string> vecDNI = eco.getVecDNICli(); //AQUI
-    
-    unsigned long paso=0, tam=eco.getVecDNICli().size(),borralos=1000;
-    for(unsigned long i=0;i<borralos;i++){
-        paso=tam-i;
-        Cliente *cli= eco.buscarCliente(vecDNI[i]);
-        //bool borrado =eco.eliminarCliente(cli.GetDni());
-        if (eco.eliminarCliente(cli->GetDni()))//ToDo:Cambiar por la linea de arriba
-           cout << "Borrando cliente: " << cli->GetDni() << endl; 
-        else
-            cout<<"Error al borrar cliente num: "<<paso;
-    }
-    cout<< "Finalizado: "<< borralos-1000<<std::endl;
-    return borralos-1000;    
-}
+
 
 int main(){    
     unsigned long primo,numero=10000;
-    /*primo=calPrimoCercanoMayor(numero);
-    std::cout<<"el primo es: "<<primo<<std::endl;*/
-    
-    
+        
     setlocale(LC_ALL,"es_ES.UTF8"); 
     srand(time(0));
-     try{ 
-        //0)creamos estructura y se cargan clientes y motos dentro
-        cout << "Creando Eco.... Comienzo de lectura de ficheros " << endl;   
-        EcoCityMoto eco("clientes_v2.csv","motos.txt",numero); 
-        //EcoCityMoto eco("clientes_v5.csv","motos2.txt",numero); 
-        //EcoCityMoto eco("prueba.txt","motos2.txt",numero);  
-    
-        //1) Añadir a la empresa un nuevo cliente que no exista previamente
-        Cliente cliente("51617459W", "Pepito Hernandez" , "passph", "Universidad", 37.5, 3.5, &eco);
-        
-        /*//2) Localizar el cliente anterior en la empresa por su DNI y buscar una moto cercana
-        if (!eco.nuevoCliente(cliente))
-            throw invalid_argument("Cliente NO insertado: el cliente ya existe");
-        
-        Cliente *cliente1=eco.buscarCliente(cliente.GetDni());
-             std::cout << "Cliente: " << cliente1->GetDni() << " Situado en: " << 
-                    cliente1->getPosicion().GetLatitud() << "," <<
-                    cliente1->getPosicion().GetLongitud() << std::endl;
-             Moto *m=cliente1->buscarMotoCercana();
-             std::cout << "Moto mas cercana: " << m->getId() << " situada en: " <<
-                   m->getPosicion().GetLatitud() << "," << m->getPosicion().GetLongitud() << std::endl;
-
-        //3) Realizar un itinerario con la moto localizada
-             std::cout << "Comienza Ruta n: " << eco.GetIdUltimo() << std::endl;
-             cliente1->desbloquearMoto(m);
-             
-             std::cout << "Desbloqueamos la Moto: " << m->getId() << std::endl;
-             cliente1->terminarTrayecto();
-             std::cout << "Fin de la Ruta: " << cliente1->UltimoItinerario().GetFecha().cadena() <<
-                     ", Minutos: " << cliente1->UltimoItinerario().GetMinutos() <<
-                     ", Id: " << cliente1->UltimoItinerario().GetVehiculo()->getId() <<
-                     ", Pos Fin: " << cliente1->UltimoItinerario().GetFin().GetLatitud() << "<-->" <<
-                     cliente1->UltimoItinerario().GetFin().GetLongitud() << std::endl;
-*/
-             
-             //4) Localizar las motos sin batería e indicar si la moto utilizada está en esa situación.
-             /*vector<Moto> v=eco.localizaMotosSinBateria();             
-             vector<Moto>::iterator itMoto=v.begin();
-             while (itMoto!=v.end()){
-                 if ((itMoto)->getId()==m->getId()){
-                     cout << "la moto Utilizada quedo sin bateria"<<endl;
-                     break;
-                 }
-                 itMoto++;
-             }*/
+    try{ 
+         int modo=0; // modo=1-> entrenar; modo=0-> ejecutar normal;
          
-             //5) Borrar el cliente que se insertó en el punto 1 
+         if(modo==1){
+             int tam[]={16890,16230};
+             
+             for(int i=0;i<2;i++){
+                 for(int j=0;j<3;j++){
+                     
+                 }
+             }
              
              
-             //unsigned long nuevoTam= borrar1000Clientes(eco);
-             //unsigned long nuevoTam= 1250;
-             eco.borraTodosLosClientes();
-             
-             eco.redispersarClientes();
-             
-            //if (eco.eliminarCliente(cliente.GetDni()))                 
-            //Cliente* cliente2=eco.buscarCliente(cliente.GetDni()); //comprobación
+         }else{
+            cout << "Creando Eco.... Comienzo de lectura de ficheros " << endl;   
+            EcoCityMoto eco("clientes_v2.csv","motos.txt",numero); 
+            //EcoCityMoto eco("clientes_v5.csv","motos2.txt",numero); 
+            //EcoCityMoto eco("prueba.txt","motos2.txt",numero);
+            
+            //1) Añadir un nuevo cliente, rango (latitud, longitud): (37, 3) - (38, 4) 
+            std::string dniCli="50617459W";
+            Cliente clienteA("50617459W", "Alejandro Molero" , "antirrobo", "Universidad", 37.3, 38.4, &eco);
+            eco.nuevoCliente(clienteA);
+            
+            //4) Buscar el cliente creado
+            Cliente *pCli= eco.buscarCliente(dniCli);
+            
+            
+            std::cout << "\nCliente: " << pCli->GetDni() << " Situado en: " << 
+                    pCli->getPosicion().GetLatitud() << "," <<
+                    pCli->getPosicion().GetLongitud() << std::endl;
+            
+            //5) Localizar la moto cercana
+            //Moto* motoCerCli = eco.LocMotoCercana(pCli->getPosicion());
+            Moto* motoCerCli =pCli->buscarMotoCercana(); 
+            std::cout << "Moto mas cercana: " << motoCerCli->getId() << " situada en: " <<
+            motoCerCli->getPosicion().GetLatitud() << "," << motoCerCli->getPosicion().GetLongitud() << std::endl;
+            
+            //6)Realizar un itinerario con la moto localizada con duración válida para la carga de batería de la moto
+            
+            
+            eco.borraTodosLosClientes(); 
+            eco.redispersarClientes();
+         }
+
                 
      //Tratamiento de errores
      }catch (ErrorFechaIncorrecta &e){

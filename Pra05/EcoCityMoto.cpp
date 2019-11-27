@@ -315,8 +315,7 @@ bool EcoCityMoto::proPracticaClientes() {
 }
 
 void EcoCityMoto::guardarClientesItinerarios(const string& fileName) {
-     ofstream fs;                    //Flujo de salida
-    //Asociamos el flujo al fichero 
+    ofstream fs;                   
     fs.open(fileName,ofstream::trunc);
     
     
