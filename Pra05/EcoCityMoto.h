@@ -47,8 +47,9 @@ public:
     vector<Moto>& getMotos();
     bool eliminarCliente(std::string borrameid);
     bool proPracticaClientes();
+    void borraTodosLosClientes(unsigned long borraTodosEstos=1000);
     vector<string> getVecDNICli();
-    void redispersarClientes(unsigned long tamTablaNuevo);
+    void redispersarClientes();
     
     virtual ~EcoCityMoto();
           

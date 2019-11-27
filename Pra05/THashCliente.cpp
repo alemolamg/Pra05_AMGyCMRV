@@ -35,7 +35,7 @@ unsigned long THashCliente::calcPrimo(unsigned long& tam) {
         bool wanda=esprimo(elPrimo);
         if(wanda){
             float comparo =(float) tam/elPrimo ;
-            if(comparo>=0.60 && comparo<=0.67){
+            if(comparo>=0.60 && comparo<=0.70){
                 encontrado=true;
                 //return elPrimo;
             }    
@@ -151,10 +151,12 @@ float THashCliente::factorCarga() {
     return (float) tamLogico/tamFisico;
 }
 
-void THashCliente::redispersar(unsigned long tamNuevo) {
-    vector<Entrada> nueva(tamNuevo,Entrada());
-    tamFisico=calcPrimo(tamNuevo);
-    //tamFisico=tamNuevo;
+void THashCliente::redispersar() {
+    
+    tamFisico=calcPrimo(tamLogico);
+    primo=tamFisico;
+    vector<Entrada> nueva(tamFisico,Entrada());
+    unsigned long numClientes=0;
     
     for (int i=0; i<tabla.size(); i++){       
         bool encontrado = false;
@@ -162,18 +164,18 @@ void THashCliente::redispersar(unsigned long tamNuevo) {
         
         if (tabla[i].marca==OCUPADA){
             unsigned long clave=djb2((unsigned char*)tabla[i].dni.c_str());
-            //bool insertCliente=insertarEnNueva(nueva,tabla[i].dni,tabla[i].cliDatos);
             
-            while (!encontrado) {
+            while (!encontrado && intento<15) {
             posNueva=hash1(clave,intento);           
-            if (nueva[posNueva].marca!=OCUPADA) {
+            if (nueva[posNueva].marca==VACIA || nueva[posNueva].marca==DISPONIBLE) {
                 nueva[posNueva].dni=tabla[i].dni;
                 nueva[posNueva].clave=clave;
                 nueva[posNueva].cliDatos=tabla[i].cliDatos;
                 nueva[posNueva].marca=OCUPADA;
-                encontrado = true;   //Encontre un sitio libre  
+                numClientes++;
+                encontrado = true;    
             }else               
-                ++intento;   //No he dado aun con una posicion libre
+                ++intento;   
         }
     
     totalColisiones+=intento;
@@ -182,6 +184,8 @@ void THashCliente::redispersar(unsigned long tamNuevo) {
         }
     }
     tabla=nueva;
+    tamLogico=numClientes;
+    cout<<"Nueva tabla terminada"<<endl;
 }
 
 unsigned int THashCliente::tamaTabla() {
@@ -211,6 +215,10 @@ vector<string> THashCliente::getVectorDNI() {
         ++i;
     }
     return vecDNI;
+}
+
+void THashCliente::setTamLogico(unsigned long tamLogico) {
+    this->tamLogico = tamLogico;
 }
 
 bool THashCliente::borrar(std::string& dni) {

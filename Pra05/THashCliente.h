@@ -62,7 +62,7 @@ public:
     THashCliente(const THashCliente& orig); 
     virtual ~THashCliente();
 
-    void redispersar (unsigned long tamNuevo); //ToDo: revisar que funciona correctamente redispersar
+    void redispersar (); //ToDo: revisar que funciona correctamente redispersar
     unsigned int numClientes();
     bool esprimo(unsigned long& n);
     
@@ -78,6 +78,8 @@ public:
     float factorCarga();
     unsigned int tamaTabla();
     vector<string> getVectorDNI();
+    void setTamLogico(unsigned long tamLogico);
+    
 
 };
 #endif /* THASHCLIENTE_H */

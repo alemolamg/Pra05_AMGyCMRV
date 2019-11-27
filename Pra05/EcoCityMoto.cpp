@@ -372,8 +372,19 @@ vector<Moto*> EcoCityMoto::localizaMotosSinBateria() {
         return vecMotos;
 }
 
-void EcoCityMoto::redispersarClientes(unsigned long tamTablaNuevo) {//ToDo: Borrar couts
+void EcoCityMoto::redispersarClientes() {//ToDo: Borrar couts
     cout << " Factor de Carga primero: " << clientes.factorCarga() << endl;
-    clientes.redispersar(tamTablaNuevo);
+    clientes.redispersar();
     cout << " Factor de Carga Despues: " << clientes.factorCarga() << endl;
+}
+
+void EcoCityMoto::borraTodosLosClientes(unsigned long borraTodosEstos){
+    vector<string> vectorDeClientes=getVecDNICli();
+    unsigned long cliBorrados=0;
+    for(cliBorrados=0;cliBorrados<borraTodosEstos;cliBorrados++){
+        clientes.borrar(vectorDeClientes[cliBorrados]);
+    }
+    clientes.setTamLogico(clientes.numClientes()-cliBorrados);
+    cout<<"Todos los clientes han sido eliminados, "<<
+            "Tam nuevo es: "<< clientes.numClientes()<<std::endl;
 }
