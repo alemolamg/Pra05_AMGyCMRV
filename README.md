@@ -10,3 +10,5 @@ Versión 5.5, y 5.6: Ajustando EcoCityMoto para la nueva versión
 
 Tabajando en versión 5.7 o superior: ajustando pequeños detalles
 
+5.9 perfila errores a la hora de guardar los ficheros
+
