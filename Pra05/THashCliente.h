@@ -61,13 +61,13 @@ public:
     THashCliente(unsigned long tamTabla=20);
     THashCliente(const THashCliente& orig); 
     virtual ~THashCliente();
-    
-    void redispersar (unsigned tamaNuevo); //ToDo: revisar que funciona correctamente redispersar
+
+    void redispersar (unsigned long tamNuevo); //ToDo: revisar que funciona correctamente redispersar
     unsigned int numClientes();
     bool esprimo(unsigned long& n);
+    
     bool insertar(const std::string& dni,Cliente& cli);
     bool buscar (string &dni, Cliente* &cli);
-    
     bool borrar(std::string& dni);
     
     

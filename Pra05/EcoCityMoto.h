@@ -6,9 +6,6 @@
 #ifndef ECOCITYMOTO_H
 #define ECOCITYMOTO_H
 
-//#include "Avl.h"
-//#include <map>
-//#include "Vdinamico.h"
 #include "THashCliente.h"
 #include <vector>
 #include "Moto.h"
@@ -49,6 +46,9 @@ public:
 
     vector<Moto>& getMotos();
     bool eliminarCliente(std::string borrameid);
+    bool proPracticaClientes();
+    vector<string> getVecDNICli();
+    void redispersarClientes(unsigned long tamTablaNuevo);
     
     virtual ~EcoCityMoto();
           
