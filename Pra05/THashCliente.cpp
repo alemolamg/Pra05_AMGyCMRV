@@ -129,9 +129,10 @@ bool THashCliente::buscar(string& dni, Cliente* &cli) {
         
         if(tabla[y].marca==VACIA || tabla[y].marca==DISPONIBLE){
             cli=nullptr;
+            return encontrado;
         }else                
             if(tabla[y].marca==OCUPADA && tabla[y].dni==dni){
-                cli=&tabla[y].cliDatos;
+                cli=&(tabla[y].cliDatos);
                 encontrado=true;
             }else
                 ++intento;
@@ -221,18 +222,18 @@ bool THashCliente::borrar(std::string& dni) {
             cli=nullptr;
         }else                
             if(tabla[y].marca==OCUPADA && tabla[y].dni==dni){
-                cli=&tabla[y].cliDatos;
+                cli=&(tabla[y].cliDatos);
                 tabla[y].marca=DISPONIBLE;
                 existe=false;
             }else
                 ++intento;
     }
-    return !existe; //ToDo: preguntar si hace falta devolver true o false
-    /*//lo siente es para comprobar que funciona
+    //return !existe; //ToDo: preguntar si hace falta devolver true o false
+    //lo siente es para comprobar que funciona
     existe=buscar(dni,cli);
     if (existe)
         throw invalid_argument ("THashCliente::borrar: no borrado correctamente");
     else
-        return true;*/
+        return true;
 }
 
