@@ -227,7 +227,7 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
             }
         }
         std::cout<<"Total de clientes en el fichero: " << total <<endl;
-        std::cout << "Tamaño tablaHash: " << clientes.numClientes() << std::endl;
+        std::cout << "Tamaño tablaHash: " << clientes.tamaTabla() << std::endl;
         std::cout << "Factor de Carga tablaHash: " << clientes.factorCarga() << std::endl;
         std::cout << "Maximo de Colisiones en la tablaHash: " << clientes.maxColisiones() << std::endl;
         std::cout << "Promedio de Colisiones en la tablaHash: " << clientes.promedioColisiones() << std::endl;
