@@ -74,7 +74,7 @@ int main(){
         //1) Añadir a la empresa un nuevo cliente que no exista previamente
         Cliente cliente("51617459W", "Pepito Hernandez" , "passph", "Universidad", 37.5, 3.5, &eco);
         
-        //2) Localizar el cliente anterior en la empresa por su DNI y buscar una moto cercana
+        /*//2) Localizar el cliente anterior en la empresa por su DNI y buscar una moto cercana
         if (!eco.nuevoCliente(cliente))
             throw invalid_argument("Cliente NO insertado: el cliente ya existe");
         
@@ -97,7 +97,7 @@ int main(){
                      ", Id: " << cliente1->UltimoItinerario().GetVehiculo()->getId() <<
                      ", Pos Fin: " << cliente1->UltimoItinerario().GetFin().GetLatitud() << "<-->" <<
                      cliente1->UltimoItinerario().GetFin().GetLongitud() << std::endl;
-
+*/
              
              //4) Localizar las motos sin batería e indicar si la moto utilizada está en esa situación.
              /*vector<Moto> v=eco.localizaMotosSinBateria();             
@@ -113,10 +113,11 @@ int main(){
              //5) Borrar el cliente que se insertó en el punto 1 
              
              
-             unsigned long nuevoTam= borrar1000Clientes(eco);
+             //unsigned long nuevoTam= borrar1000Clientes(eco);
              //unsigned long nuevoTam= 1250;
+             eco.borraTodosLosClientes();
              
-             eco.redispersarClientes(nuevoTam);
+             eco.redispersarClientes();
              
             //if (eco.eliminarCliente(cliente.GetDni()))                 
             //Cliente* cliente2=eco.buscarCliente(cliente.GetDni()); //comprobación
