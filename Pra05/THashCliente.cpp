@@ -22,19 +22,17 @@ THashCliente::~THashCliente() {
 }
 
 unsigned long THashCliente::calcPrimo(unsigned long& tam) {
-    unsigned long elPrimo; 
-    elPrimo=tam+1;
+    unsigned long elPrimo=tam+1;
     bool encontrado=false;
     do{
+        ++elPrimo;
         bool wanda=esprimo(elPrimo);
         if(wanda){
-            if(tam/elPrimo>=0.60)
+            float comparo =(float) tam/elPrimo ;
+            if(comparo>=0.60 && comparo<=0.70){
                 encontrado=true;
-            else
-                if(tam/elPrimo>=0.70)
-                    --elPrimo;
-                else
-                    ++elPrimo;
+                //return elPrimo;
+            }    
         }           
     }while(!encontrado);
     return elPrimo;

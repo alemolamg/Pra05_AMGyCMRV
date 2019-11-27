@@ -27,17 +27,16 @@ void EcoCityMoto::cargarMotos(string fileNameMotos){
     string linea;                   
     int total = 0;                 
     
-    
-    string matricula, latitud, longitud,estado;
-    double dlat, dlon;
     int destado;
+    double dlat, dlon;
+    string matricula, latitud, longitud,estado;
     tipoEstado tipo;
 
 
     fe.open(fileNameMotos);
     
     if(fe.good()){
-        //Mientras no se haya llegado al final del fichero
+        
         getline(fe, linea); //lee la primera, que es informativa
         getline(fe, linea);     //Toma una línea del fichero
         while(!fe.eof()){            
@@ -72,10 +71,10 @@ void EcoCityMoto::cargarMotos(string fileNameMotos){
                 
                 //con todos los atributos leídos, se crea la moto
                 Moto moto(tipo, matricula, dlat, dlon);
-
                 motos.push_back(moto);
+                
                 //comprobacion lectura
-               //std::cout << moto.getId() << ";" << moto.getPosicion().latitud <<std::endl;            
+               std::cout << moto.getId() << ";" << moto.getPosicion().latitud <<std::endl;            
             }              
             getline(fe, linea);     //Toma una línea del fichero
         }    
@@ -234,8 +233,8 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
     }    
 }
 
-EcoCityMoto::EcoCityMoto(const string& fileClientes, const string& fileMotos):
-    idUltimo(0), clientes(), motos(){
+EcoCityMoto::EcoCityMoto(const string& fileClientes, const string& fileMotos,unsigned long tamTabla):
+    idUltimo(0), clientes(tamTabla), motos(){
     cargarMotos(fileMotos);
     cargarClientes(fileClientes);
 }
@@ -342,7 +341,7 @@ bool EcoCityMoto::nuevoCliente(Cliente& nuevoCli) {
     return (clientes.insertar(clave,nuevoCli));
 }
 
-bool EcoCityMoto::eliminarCliente(std::string borrameid) {//ToDo: Arreglar THashCliente, falta borrar();
+bool EcoCityMoto::eliminarCliente(std::string borrameid) {
     //return clientes.erase(borrameid);
     return clientes.borrar(borrameid);
     
