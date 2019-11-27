@@ -5,15 +5,17 @@
  */
 
 #include <queue>
+#include <limits>
 #include "Cliente.h"
 #include "THashCliente.h"
 
 THashCliente::THashCliente(unsigned long tamTabla):
-    //tamFisico(THashCliente::calcPrimo(tamTabla)),tamLogico(0),totalColisiones(0),
-    tamFisico(tamTabla),tamLogico(0),totalColisiones(0),
-    //maxCol(0),primo(tamFisico),tabla(tamTabla,Entrada()){
-    maxCol(0),tabla(tamTabla,Entrada()){
-    primo=calcPrimo(tamFisico);
+    tamFisico(THashCliente::calcPrimo(tamTabla)),tamLogico(0),totalColisiones(0),
+    //tamFisico(tamTabla),tamLogico(0),totalColisiones(0),
+    maxCol(0),tabla(tamFisico,Entrada()){
+    //maxCol(0),tabla(tamTabla,Entrada()){
+    //tamFisico=THashCliente::calcPrimo(tamTabla);
+    primo=calcPrimo(tamTabla);
     
     
 }
@@ -33,7 +35,7 @@ unsigned long THashCliente::calcPrimo(unsigned long& tam) {
         bool wanda=esprimo(elPrimo);
         if(wanda){
             float comparo =(float) tam/elPrimo ;
-            if(comparo>=0.60 && comparo<=0.70){
+            if(comparo>=0.60 && comparo<=0.67){
                 encontrado=true;
                 //return elPrimo;
             }    
@@ -97,7 +99,7 @@ bool THashCliente::insertar(const std::string& dni, Cliente &cli) {
     bool encontrado=false;
     unsigned long clave=djb2((unsigned char*)dni.c_str());
     
-    while (!encontrado && intento<=15) {
+    while (!encontrado /*&& intento<20*/) {
         
             y=hash1(clave,intento); 
             //std::cout<<"calculada posición: "<<y<<std::endl;
@@ -141,7 +143,8 @@ bool THashCliente::buscar(string& dni, Cliente* &cli) {
 }
 
 float THashCliente::promedioColisiones() {
-    return (float)(totalColisiones/tamLogico);
+    return (float) totalColisiones/tamLogico;
+    //return totalCol;
 }
 
 float THashCliente::factorCarga() {
@@ -228,7 +231,7 @@ bool THashCliente::borrar(std::string& dni) {
             }else
                 ++intento;
     }
-    //return !existe; //ToDo: preguntar si hace falta devolver true o false
+    //return !existe;
     //lo siente es para comprobar que funciona
     existe=buscar(dni,cli);
     if (existe)
