@@ -40,7 +40,7 @@ unsigned long calPrimoCercanoMayor (unsigned long num){
 }
 
 int main(){    
-    unsigned long primo,numero=25;
+    unsigned long primo,numero=10000;
     /*primo=calPrimoCercanoMayor(numero);
     std::cout<<"el primo es: "<<primo<<std::endl;*/
     

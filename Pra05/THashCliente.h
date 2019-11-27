@@ -45,7 +45,7 @@ private:
     unsigned long calcPrimo(unsigned long& tam);
     unsigned long calcPrimoMenor(unsigned long& primer);
     unsigned long hash1(unsigned long& clave, int intento); 
-    unsigned long hash2(unsigned long& clave, int intento);
+    
     
     
 public:

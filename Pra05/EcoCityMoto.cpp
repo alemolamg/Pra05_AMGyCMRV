@@ -74,7 +74,7 @@ void EcoCityMoto::cargarMotos(string fileNameMotos){
                 motos.push_back(moto);
                 
                 //comprobacion lectura
-               std::cout << moto.getId() << ";" << moto.getPosicion().latitud <<std::endl;            
+               //std::cout << moto.getId() << ";" << moto.getPosicion().latitud <<std::endl;            
             }              
             getline(fe, linea);     //Toma una línea del fichero
         }    
@@ -84,6 +84,7 @@ void EcoCityMoto::cargarMotos(string fileNameMotos){
     }else{
         cerr<<"No se puede abrir el fichero"<<endl;
     }
+    cout<<"cargadas Motos Correctamente" << endl;
 }
 
 void EcoCityMoto::cargarClientes(const string &fileNameClientes){
@@ -144,8 +145,11 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
                             minLat=dlat;
                     //con todos los atributos leídos, se crea el cliente
                     Cliente client (dni, nombre, pass, direccion,dlat, dlon, this);
-                    clientes.insertar(dni,client);
-                   //std::cout << client.GetDni() << ";" << client.GetNombre() <<std::endl;            
+                    bool funciona=clientes.insertar(dni,client);
+                    if (!funciona)
+                        std::cout <<"No insertado"<<std::endl;
+                    //else
+                        //std::cout << client.GetDni() << ";" << client.GetNombre() <<std::endl;            
                 }              
                 getline(fe, linea);     //Toma una línea del fichero
             }
