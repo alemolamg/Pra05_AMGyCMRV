@@ -40,9 +40,10 @@ unsigned long calPrimoCercanoMayor (unsigned long num){
 }
 
 unsigned long borrar1000Clientes(EcoCityMoto& eco){
-    vector<string> vecDNI = eco.getVecDNICli();
+    vector<string> vecDNI = eco.getVecDNICli(); //AQUI
+    
     unsigned long paso=0, tam=eco.getVecDNICli().size(),borralos=1000;
-    for(int i=0;i<borralos;i++){
+    for(unsigned long i=0;i<borralos;i++){
         paso=tam-i;
         Cliente *cli= eco.buscarCliente(vecDNI[i]);
         //bool borrado =eco.eliminarCliente(cli.GetDni());
