@@ -327,7 +327,6 @@ void EcoCityMoto::guardarClientesItinerarios(const string& fileName) {
         int i=0; 
         while (i<vecCli.size()){            
             bool p=clientes.buscar(vecCli[i],pclient);
-            
             list<Itinerario> r=pclient->getRutas();
             list<Itinerario>::iterator it2=r.begin();
             fs << pclient->GetDni() <<";"<< pclient->GetPass() <<";"<< pclient->GetNombre() <<";"<<
