@@ -1,5 +1,4 @@
 2;NIF;clave;nomape;dirección;latitud;longitud;nIti;bajar_linea;id;inicioLat;inicioLon;finLat;finLon;dia;mes;anio;hora;minuto;minutos;moto
-94150839O;;;;0;0;0
 21137672O;;;;0;0;0
 27687264J;;;;0;0;0
 79574746A;;;;0;0;0
@@ -5943,6 +5942,7 @@
 50752694P;;;;0;0;0
 58576814A;;;;0;0;0
 92406083C;;;;0;0;0
+51617459W;;;;0;0;0
 93239630X;;;;0;0;0
 60325252O;;;;0;0;0
 92353190E;;;;0;0;0

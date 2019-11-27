@@ -44,14 +44,15 @@ unsigned long borrar1000Clientes(EcoCityMoto& eco){
     unsigned long paso=0, tam=eco.getVecDNICli().size(),borralos=1000;
     for(int i=0;i<borralos;i++){
         paso=tam-i;
-        Cliente *cli= eco.buscarCliente(vecDNI[paso]);
-        //bool borrado =eco.eliminarCliente(cli.GetDni();
+        Cliente *cli= eco.buscarCliente(vecDNI[i]);
+        //bool borrado =eco.eliminarCliente(cli.GetDni());
         if (eco.eliminarCliente(cli->GetDni()))//ToDo:Cambiar por la linea de arriba
            cout << "Borrando cliente: " << cli->GetDni() << endl; 
         else
             cout<<"Error al borrar cliente num: "<<paso;
     }
-    return paso;    
+    cout<< "Finalizado: "<< borralos-1000<<std::endl;
+    return borralos-1000;    
 }
 
 int main(){    
@@ -110,14 +111,15 @@ int main(){
          
              //5) Borrar el cliente que se insertó en el punto 1 
              
-             unsigned long nuevoTam= borrar1000Clientes(eco);
-             eco.redispersarClientes(nuevoTam);
              
+             unsigned long nuevoTam= borrar1000Clientes(eco);
+             //unsigned long nuevoTam= 1250;
+             
+             eco.redispersarClientes(nuevoTam);
              
             //if (eco.eliminarCliente(cliente.GetDni()))                 
             //Cliente* cliente2=eco.buscarCliente(cliente.GetDni()); //comprobación
-            
-    
+                
      //Tratamiento de errores
      }catch (ErrorFechaIncorrecta &e){
             std::cerr << "Fecha Incorrecta: " << std::endl;

@@ -152,8 +152,10 @@ float THashCliente::factorCarga() {
 }
 
 void THashCliente::redispersar(unsigned long tamNuevo) {
-    vector<Entrada> nueva(tamNuevo,Entrada());
-    tamFisico=calcPrimo(tamNuevo);
+    tamFisico=calcPrimo(tamNuevo);primo=tamFisico;
+    vector<Entrada> nueva(tamFisico,Entrada());
+    unsigned long numClientes=0;
+    
     //tamFisico=tamNuevo;
     
     for (int i=0; i<tabla.size(); i++){       
@@ -164,13 +166,14 @@ void THashCliente::redispersar(unsigned long tamNuevo) {
             unsigned long clave=djb2((unsigned char*)tabla[i].dni.c_str());
             //bool insertCliente=insertarEnNueva(nueva,tabla[i].dni,tabla[i].cliDatos);
             
-            while (!encontrado) {
+            while (!encontrado && intento<15) {
             posNueva=hash1(clave,intento);           
             if (nueva[posNueva].marca!=OCUPADA) {
                 nueva[posNueva].dni=tabla[i].dni;
                 nueva[posNueva].clave=clave;
                 nueva[posNueva].cliDatos=tabla[i].cliDatos;
                 nueva[posNueva].marca=OCUPADA;
+                numClientes++;
                 encontrado = true;   //Encontre un sitio libre  
             }else               
                 ++intento;   //No he dado aun con una posicion libre
@@ -182,6 +185,8 @@ void THashCliente::redispersar(unsigned long tamNuevo) {
         }
     }
     tabla=nueva;
+    tamLogico=numClientes;
+    cout<<"Nueva tabla terminada"<<endl;
 }
 
 unsigned int THashCliente::tamaTabla() {
