@@ -9,9 +9,13 @@
 #include "THashCliente.h"
 
 THashCliente::THashCliente(unsigned long tamTabla):
+    //tamFisico(THashCliente::calcPrimo(tamTabla)),tamLogico(0),totalColisiones(0),
     tamFisico(tamTabla),tamLogico(0),totalColisiones(0),
+    //maxCol(0),primo(tamFisico),tabla(tamTabla,Entrada()){
     maxCol(0),tabla(tamTabla,Entrada()){
     primo=calcPrimo(tamFisico);
+    
+    
 }
 
 THashCliente::THashCliente(const THashCliente& orig):
@@ -54,10 +58,24 @@ unsigned int THashCliente::maxColisiones(){
 }
 
 unsigned long THashCliente::hash1(unsigned long& clave, int intento) {
-    unsigned long hashGen,nuevoPrimo=calcPrimoMenor(primo);
-    
-    hashGen=(clave)+ (intento*(clave%nuevoPrimo));
+    int fun=1;
+     unsigned long hashGen;//,nuevoPrimo=calcPrimoMenor(primo);
+    switch(fun){
+        case 0:
+            hashGen=(clave)+ (intento*(clave%primo));
+            return hashGen;
+            break;
+        case 1:
+            hashGen= (clave+(intento*intento)) % tamFisico;
+            break;
+        case 2:
+            unsigned long modulo = clave % tamFisico;   // mejor FUNCION DE DISPERSION        
+            hashGen = (modulo + (intento* (primo-(clave % (primo))))) % tamFisico;
+            break;
+    }
     return hashGen;
+    
+    //hashGen=(clave)+ (intento*(clave%nuevoPrimo));
 }
 
 unsigned long THashCliente::calcPrimoMenor(unsigned long& primer) {
@@ -79,9 +97,10 @@ bool THashCliente::insertar(const std::string& dni, Cliente &cli) {
     bool encontrado=false;
     unsigned long clave=djb2((unsigned char*)dni.c_str());
     
-    while (!encontrado) {
+    while (!encontrado && intento<=15) {
         
-            y=hash1(clave,intento);           
+            y=hash1(clave,intento); 
+            //std::cout<<"calculada posición: "<<y<<std::endl;
         
             if (tabla[y].marca==VACIA || tabla[y].marca==DISPONIBLE) {                
                 tamLogico++;
