@@ -111,9 +111,12 @@ int main(){
             if (!alemol)
                 cout<<"Cliente no añadido correctamente"<<std::endl;
             
-            
-            eco.borraTodosLosClientes(); 
+            //10) Eliminar 1000 clientes y redispersar si es necesario
+            eco.borraTodosLosClientes(1000); 
             eco.redispersarClientes();
+            
+            //11) volver a cargar los ficheros como en la practica 4...
+            
          }
 
                 
