@@ -350,7 +350,6 @@ void EcoCityMoto::guardarClientesItinerarios(const string& fileName) {
 
 bool EcoCityMoto::nuevoCliente(Cliente& nuevoCli) {
     std::string clave=nuevoCli.GetDni();
-    //return (clientes.insert(std::pair<std::string,Cliente>(clave,nuevoCli)).second);
     return (clientes.insertar(clave,nuevoCli));
 }
 

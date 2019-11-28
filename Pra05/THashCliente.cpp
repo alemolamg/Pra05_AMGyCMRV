@@ -153,6 +153,11 @@ float THashCliente::factorCarga() {
 
 void THashCliente::redispersar() {
     
+    if(! (factorCarga()<0.60 || factorCarga()>0.70 )){
+        std::cout<<"No hace falta redispersar"<<std::endl;
+        
+    }else{
+    
     tamFisico=calcPrimo(tamLogico);
     primo=tamFisico;
     vector<Entrada> nueva(tamFisico,Entrada());
@@ -184,8 +189,9 @@ void THashCliente::redispersar() {
         }
     }
     tabla=nueva;
-    tamLogico=numClientes;
+    tamLogico=numClientes; //ToDo: Cambiar por tamTabla
     cout<<"Nueva tabla terminada"<<endl;
+    }
 }
 
 unsigned int THashCliente::tamaTabla() {

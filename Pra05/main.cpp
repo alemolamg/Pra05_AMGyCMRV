@@ -85,10 +85,38 @@ int main(){
             motoCerCli->getPosicion().GetLatitud() << "," << motoCerCli->getPosicion().GetLongitud() << std::endl;
             
             //6)Realizar un itinerario con la moto localizada con duración válida para la carga de batería de la moto
+            std::cout << "Comienza Ruta n: " << eco.GetIdUltimo() << std::endl;
+            motoCerCli->darAviso(); //esto es de la parte 7;
+            pCli->desbloquearMoto(motoCerCli);
+            std::cout << "Desbloqueamos la Moto: " << motoCerCli->getId() << std::endl;
+            pCli->terminarTrayecto();
+            std::cout << "Fin de la Ruta: " << pCli->UltimoItinerario().GetFecha().cadena() <<
+                    ", Minutos: " << pCli->UltimoItinerario().GetMinutos() <<
+                    ", Id: " << pCli->UltimoItinerario().GetVehiculo()->getId() <<
+                    ", Pos Fin: " << pCli->UltimoItinerario().GetFin().GetLatitud() << "<-->" <<
+                    pCli->UltimoItinerario().GetFin().GetLongitud() << std::endl;
             
+            //7) mostrar en el display estado moto
+            motoCerCli->darAviso();
             
-            eco.borraTodosLosClientes(); 
+            //8) Borrar el cliente
+            if(eco.eliminarCliente(clienteA.GetDni()))
+                cout<<"Cliente Borrado correctamente"<<std::endl;
+            else{
+                cout<<"Cliente no borrado"<<std::endl;
+                throw invalid_argument ("Main.cpp: parte8:: cliente no borrado");
+            }
+            //9) insertar el mismo cliente de nuevo
+            bool alemol=eco.nuevoCliente(clienteA); 
+            if (!alemol)
+                cout<<"Cliente no añadido correctamente"<<std::endl;
+            
+            //10) Eliminar 1000 clientes y redispersar si es necesario
+            eco.borraTodosLosClientes(1000); 
             eco.redispersarClientes();
+            
+            //11) volver a cargar los ficheros como en la practica 4...
+            
          }
 
                 

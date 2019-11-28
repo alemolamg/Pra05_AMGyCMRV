@@ -87,6 +87,6 @@ void Moto::darAviso(){
         case 1: usadoPor->mostrarMensaje("Activada");break;
         case 2: usadoPor->mostrarMensaje("Bloqueada");break;
         case 3: usadoPor->mostrarMensaje("Rota");break;
-                
+               
     }
 };
