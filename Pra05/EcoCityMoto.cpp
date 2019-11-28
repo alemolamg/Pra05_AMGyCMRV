@@ -10,6 +10,12 @@
 #include <algorithm>
 #include "EcoCityMoto.h"
 
+EcoCityMoto::EcoCityMoto(const string& fileClientes, const string& fileMotos,unsigned long tamTabla,int funcionHash):
+    idUltimo(0), clientes(tamTabla), motos(){
+    cargarMotos(fileMotos);
+    cargarClientes(fileClientes,funcionHash);
+}
+
 EcoCityMoto::EcoCityMoto(const EcoCityMoto& orig):
     idUltimo(orig.idUltimo),motos(orig.motos),clientes(orig.clientes){}
 
@@ -87,7 +93,7 @@ void EcoCityMoto::cargarMotos(string fileNameMotos){
     cout<<"cargadas Motos Correctamente" << endl;
 }
 
-void EcoCityMoto::cargarClientes(const string &fileNameClientes){
+void EcoCityMoto::cargarClientes(const string &fileNameClientes,int funHash){
     ifstream fe;                    //Flujo de entrada
     string tipofichero,linea;       //Cada línea tiene un clienete
     int total = 0;                  //Contador de líneas o clientes
@@ -145,11 +151,12 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
                             minLat=dlat;
                     //con todos los atributos leídos, se crea el cliente
                     Cliente client (dni, nombre, pass, direccion,dlat, dlon, this);
+                    clientes.setSelecHash(funHash);
                     bool funciona=clientes.insertar(dni,client);
                     if (!funciona)
                         std::cout <<"No insertado"<<std::endl;
-                    //else
-                        //std::cout << client.GetDni() << ";" << client.GetNombre() <<std::endl;            
+//                    else
+//                        std::cout << client.GetDni() << ";" << client.GetNombre() <<std::endl;            
                 }              
                 getline(fe, linea);     //Toma una línea del fichero
             }
@@ -237,12 +244,6 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes){
     }    
 }
 
-EcoCityMoto::EcoCityMoto(const string& fileClientes, const string& fileMotos,unsigned long tamTabla):
-    idUltimo(0), clientes(tamTabla), motos(){
-    cargarMotos(fileMotos);
-    cargarClientes(fileClientes);
-}
-
     
 unsigned EcoCityMoto::GetIdUltimo() const{
         return idUltimo;
@@ -294,9 +295,12 @@ void EcoCityMoto::crearItinerarios(int num, const UTM& min, const UTM& max) {
     int i=0;
     while (i<vectorClientes.size()) {
     //while (i<clientes.getVectorDNI().size()) {
-        bool nada=clientes.buscar(vectorClientes[i],aux);
+        bool encon=clientes.buscar(vectorClientes[i],aux); //ToDo: cambiar a variable interna
+        if (encon){
         aux->crearItinerario (num,idUltimo,min,max);
         idUltimo=idUltimo+num;
+        }else 
+            cout<<"Cliente no encontrado: "<<vectorClientes[i]<< endl;
         ++i;
     }
 }

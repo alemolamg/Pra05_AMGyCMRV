@@ -11,10 +11,8 @@
 
 THashCliente::THashCliente(unsigned long tamTabla):
     tamFisico(THashCliente::calcPrimo(tamTabla)),tamLogico(0),totalColisiones(0),
-    //tamFisico(tamTabla),tamLogico(0),totalColisiones(0),
     maxCol(0),tabla(tamFisico,Entrada()){
-    //maxCol(0),tabla(tamTabla,Entrada()){
-    //tamFisico=THashCliente::calcPrimo(tamTabla);
+    
     primo=calcPrimo(tamTabla);
     
     
@@ -32,18 +30,18 @@ unsigned long THashCliente::calcPrimo(unsigned long& tam) {
     double ocMin=0.6,ocMax=0.7;
     bool encontrado=false;
     do{
-        //++elPrimo;
+        ++elPrimo;
         bool alemol=esprimo(elPrimo);
         if(alemol){
             float comparo =(float) tam/elPrimo ;
             if(comparo>=ocMin && comparo<=ocMax){
                 encontrado=true;
                 //return elPrimo;
-            }else{ // sirve para gestionar el incremento o decremento
+            /*}else{ // sirve para gestionar el incremento o decremento
                 if(comparo<ocMin)
                     --elPrimo;
-                if(comparo>ocMax)
-                    ++elPrimo;
+                else
+                    ++elPrimo;*/
             }
         }           
     }while(!encontrado);
@@ -65,19 +63,19 @@ unsigned int THashCliente::maxColisiones(){
     return maxCol;
 }
 
-unsigned long THashCliente::hash1(unsigned long& clave, int intento,int fun) {
-    
+unsigned long THashCliente::hash1(unsigned long& clave, int intento) {
+    int fun=selecHash;
     unsigned long hashGen;//,nuevoPrimo=calcPrimoMenor(primo);
     switch(fun){
-        case 0:
-            hashGen=(clave)+ (intento*(clave%primo));
+        case 0:     //dispersion doble
+            hashGen=((clave%tamFisico)+ (intento*(clave%primo)))%tamFisico;
             return hashGen;
             break;
-        case 1:
+        case 1:     //dispersión cuadrática OK
             hashGen= (clave+(intento*intento)) % tamFisico;
             break;
-        case 2:
-            unsigned long modulo = clave % tamFisico;   // mejor FUNCION DE DISPERSION        
+        case 2:     //dispersion doble
+            unsigned long modulo = clave % tamFisico;     
             hashGen = (modulo + (intento* (primo-(clave % (primo))))) % tamFisico;
             break;
     }
@@ -105,7 +103,7 @@ bool THashCliente::insertar(const std::string& dni, Cliente &cli) {
     bool encontrado=false;
     unsigned long clave=djb2((unsigned char*)dni.c_str());
     
-    while (!encontrado /*&& intento<20*/) {
+    while (!encontrado && intento<tamFisico) {
         
             y=hash1(clave,intento); 
             //std::cout<<"calculada posición: "<<y<<std::endl;
@@ -135,8 +133,8 @@ bool THashCliente::buscar(string& dni, Cliente* &cli) {
     while (!encontrado){
         y=hash1(clave,intento);
         
-        if(tabla[y].marca==VACIA || tabla[y].marca==DISPONIBLE){
-            cli=nullptr;
+        if(tabla[y].marca==VACIA){
+            //cli=nullptr;
             return encontrado;
         }else                
             if(tabla[y].marca==OCUPADA && tabla[y].dni==dni){
@@ -207,23 +205,24 @@ unsigned int THashCliente::tamaTabla() {
 vector<string> THashCliente::getVectorDNI() {
     vector<string> vecDNI;
     int pos=0, i=0;
-    bool acabado=false;
+//    bool acabado=false;
     Cliente *cli;
     
     //while (i<tabla.size()){
     while (i<tamFisico){
         
-        if(tabla[i].marca==VACIA || tabla[i].marca==DISPONIBLE){
-            cli=nullptr;
-        }else                
+//        if(tabla[i].marca==VACIA || tabla[i].marca==DISPONIBLE){
+//            cli=nullptr;
+//        }else                
             if(tabla[i].marca==OCUPADA ){
                 cli=&(tabla[i].cliDatos);
-                acabado=true;
+                vecDNI.push_back(cli->GetDni());
+//                acabado=true;
             }
-        if(cli){
-            vecDNI.push_back(cli->GetDni());
-            ++pos;
-        }
+//        if(cli){
+//            vecDNI.push_back(cli->GetDni());
+//            ++pos;
+//        }
         ++i;
     }
     return vecDNI;
@@ -232,6 +231,11 @@ vector<string> THashCliente::getVectorDNI() {
 void THashCliente::setTamLogico(unsigned long tamLogico) {
     this->tamLogico = tamLogico;
 }
+
+void THashCliente::setSelecHash(int selecHash) {
+    this->selecHash = selecHash;
+}
+
 
 bool THashCliente::borrar(std::string& dni) {
     unsigned long clave=djb2((unsigned char*)dni.c_str());

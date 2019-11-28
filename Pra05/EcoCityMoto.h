@@ -22,7 +22,7 @@ private:
     
     //---FUNCIONES----------//
     void cargarMotos(string fileNameMotos);
-    void cargarClientes(const string &fileNameClientes);
+    void cargarClientes(const string &fileNameClientes,int funHash);
     void crearItinerarios(int num,const UTM &min,const UTM &max);
     void guardarClientesItinerarios(const string &fileName);   
 //    THashCliente& getClientes();
@@ -31,7 +31,7 @@ private:
 
     
 public:
-    EcoCityMoto(const string &fileClientes="prueba.txt",const string &fileMotos="motos.txt",unsigned long tamTabla=10000);
+    EcoCityMoto(const string &fileClientes="prueba.txt",const string &fileMotos="motos.txt",unsigned long tamTabla=10000,int funcionHash=0);
     EcoCityMoto(const EcoCityMoto& orig);
     
     unsigned GetIdUltimo() const;

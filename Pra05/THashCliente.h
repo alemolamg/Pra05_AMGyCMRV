@@ -39,12 +39,13 @@ private:
     unsigned long totalColisiones;
     unsigned long maxCol;
     unsigned long primo;// Primo usado para la tabla=tam
+    int selecHash=1;
     std::vector<Entrada> tabla;
     
     //--------Funciones--------//
     unsigned long calcPrimo(unsigned long& tam);
     unsigned long calcPrimoMenor(unsigned long& primer);
-    unsigned long hash1(unsigned long& clave, int intento,int fun=1); 
+    unsigned long hash1(unsigned long& clave, int intento); 
     
     
     
@@ -79,6 +80,8 @@ public:
     unsigned int tamaTabla();
     vector<string> getVectorDNI();
     void setTamLogico(unsigned long tamLogico);
+    void setSelecHash(int selecHash);
+    //int getSelecHash() const;
     
 
 };

@@ -10,37 +10,6 @@
 #include "Moto.h"
 #include "EcoCityMoto.h"
 
-
-bool numEsPrimo(unsigned long& num) {
-        for (unsigned i = 2; i <= num/2; i++)
-            if (num % i == 0)
-                return false;
-        return true;
-}
-
-unsigned long calPrimoCercanoMayor (unsigned long num){
-    
-        unsigned long elPrimo=num;
-    
-        bool encontrado=false;
-        do{
-            ++elPrimo;
-            bool wanda=numEsPrimo(elPrimo);
-            if(wanda){
-                float comparo =(float) num/elPrimo ;
-                if(comparo>=0.60 && comparo<=0.66 )
-                 encontrado=true;
-                /*else
-                    if(comparo>=0.70)
-                        --elPrimo;*/     
-            }   
-            
-        }while(!encontrado);
-        return elPrimo;
-}
-
-
-
 int main(){    
     unsigned long primo,numero=10000;
         
@@ -50,16 +19,22 @@ int main(){
          int modo=0; // modo=1-> entrenar; modo=0-> ejecutar normal;
          
          if(modo==1){
-             EcoCityMoto ecoEntrena("clientes_v2.csv","motos.txt",numero);
+            //int funHash=0;
+            int tam[]={16890,16230};
+            //cout<<"Cargamos el archivo con el numero: "<<  <<std::endl;
+            //EcoCityMoto ecoEntrena1("clientes_v2.csv","motos.txt",tam[0]);
+            //EcoCityMoto ecoEntrena2("clientes_v2.csv","motos.txt",tam[1]);
              
-             
-             int tam[]={16890,16230};
-             
-             for(int i=0;i<2;i++){
-                 for(int j=0;j<3;j++){
+            for(int i=0;i<2;i++){ //Cambia el Tamaño
+                cout<<"\n\nCargamos con el numero "<<i<<std::endl;
+                for(int funHash=0;funHash<3;funHash++){ //Recorre las funciones hash
+                    cout<<"\nCargamos el archivo con el numero: "<< tam[i]<<"funHash num: "<<funHash+1 <<std::endl;
+                    EcoCityMoto ecoEntrena("clientes_v2.csv","motos.txt",tam[i],funHash);
+                    //cout<<"Fin del nuemro "<<tam[i]<<"\n\n";
                      
-                 }
+                }
              }
+            cout <<"TERMINADO ENTRENAMIENTO\n"<<std::endl;
              
              
          }else{
@@ -89,8 +64,8 @@ int main(){
             
             //6)Realizar un itinerario con la moto localizada con duración válida para la carga de batería de la moto
             std::cout << "Comienza Ruta n: " << eco.GetIdUltimo() << std::endl;
-            motoCerCli->darAviso(); //esto es de la parte 7;
             pCli->desbloquearMoto(motoCerCli);
+            //motoCerCli->darAviso(); //esto es de la parte 7;
             std::cout << "Desbloqueamos la Moto: " << motoCerCli->getId() << std::endl;
             pCli->terminarTrayecto();
             std::cout << "Fin de la Ruta: " << pCli->UltimoItinerario().GetFecha().cadena() <<
@@ -100,7 +75,7 @@ int main(){
                     pCli->UltimoItinerario().GetFin().GetLongitud() << std::endl;
             
             //7) mostrar en el display estado moto
-            motoCerCli->darAviso();
+            //motoCerCli->darAviso();
             
             //8) Borrar el cliente
             if(eco.eliminarCliente(clienteA.GetDni()))
@@ -133,8 +108,7 @@ int main(){
      }catch (std::invalid_argument &e){
             std::cerr << e.what() << std::endl;
      } 
-     
-     
+          
     return 0;
     
 }

@@ -121,6 +121,7 @@ void Cliente::crearItinerario(int num, int idUltimo, UTM min, UTM max) {
     
     for(int i=0;i<num;i++){
         motosVector[i]->seDesactiva();
+        //cout<<"Moto "<<i<<" Desactivada \n";
     }
 };
 
@@ -189,5 +190,5 @@ void Cliente::setRutas(list<Itinerario> rutaNueva) {
 
 void Cliente::mostrarMensaje(string texto){
     display=texto;
-    
+    std::cout<<display<<std::endl;
 };
