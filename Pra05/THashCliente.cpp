@@ -65,9 +65,9 @@ unsigned int THashCliente::maxColisiones(){
     return maxCol;
 }
 
-unsigned long THashCliente::hash1(unsigned long& clave, int intento) {
-    int fun=1;
-     unsigned long hashGen;//,nuevoPrimo=calcPrimoMenor(primo);
+unsigned long THashCliente::hash1(unsigned long& clave, int intento,int fun) {
+    
+    unsigned long hashGen;//,nuevoPrimo=calcPrimoMenor(primo);
     switch(fun){
         case 0:
             hashGen=(clave)+ (intento*(clave%primo));

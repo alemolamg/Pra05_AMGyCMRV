@@ -50,6 +50,9 @@ int main(){
          int modo=0; // modo=1-> entrenar; modo=0-> ejecutar normal;
          
          if(modo==1){
+             EcoCityMoto ecoEntrena("clientes_v2.csv","motos.txt",numero);
+             
+             
              int tam[]={16890,16230};
              
              for(int i=0;i<2;i++){
