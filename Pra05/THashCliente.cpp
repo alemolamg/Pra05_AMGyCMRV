@@ -29,16 +29,22 @@ THashCliente::~THashCliente() {
 
 unsigned long THashCliente::calcPrimo(unsigned long& tam) {
     unsigned long elPrimo=tam+1;
+    double ocMin=0.6,ocMax=0.7;
     bool encontrado=false;
     do{
-        ++elPrimo;
-        bool wanda=esprimo(elPrimo);
-        if(wanda){
+        //++elPrimo;
+        bool alemol=esprimo(elPrimo);
+        if(alemol){
             float comparo =(float) tam/elPrimo ;
-            if(comparo>=0.60 && comparo<=0.70){
+            if(comparo>=ocMin && comparo<=ocMax){
                 encontrado=true;
                 //return elPrimo;
-            }    
+            }else{ // sirve para gestionar el incremento o decremento
+                if(comparo<ocMin)
+                    --elPrimo;
+                if(comparo>ocMax)
+                    ++elPrimo;
+            }
         }           
     }while(!encontrado);
     return elPrimo;
@@ -59,9 +65,9 @@ unsigned int THashCliente::maxColisiones(){
     return maxCol;
 }
 
-unsigned long THashCliente::hash1(unsigned long& clave, int intento) {
-    int fun=1;
-     unsigned long hashGen;//,nuevoPrimo=calcPrimoMenor(primo);
+unsigned long THashCliente::hash1(unsigned long& clave, int intento,int fun) {
+    
+    unsigned long hashGen;//,nuevoPrimo=calcPrimoMenor(primo);
     switch(fun){
         case 0:
             hashGen=(clave)+ (intento*(clave%primo));

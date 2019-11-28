@@ -31,7 +31,7 @@ private:
 
     
 public:
-    EcoCityMoto(const string &fileClientes,const string &fileMotos,unsigned long tamTabla );
+    EcoCityMoto(const string &fileClientes="prueba.txt",const string &fileMotos="motos.txt",unsigned long tamTabla=10000);
     EcoCityMoto(const EcoCityMoto& orig);
     
     unsigned GetIdUltimo() const;

@@ -44,7 +44,7 @@ private:
     //--------Funciones--------//
     unsigned long calcPrimo(unsigned long& tam);
     unsigned long calcPrimoMenor(unsigned long& primer);
-    unsigned long hash1(unsigned long& clave, int intento); 
+    unsigned long hash1(unsigned long& clave, int intento,int fun=1); 
     
     
     
