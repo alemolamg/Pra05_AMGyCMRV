@@ -151,11 +151,12 @@ void EcoCityMoto::cargarClientes(const string &fileNameClientes,int funHash){
                             minLat=dlat;
                     //con todos los atributos leídos, se crea el cliente
                     Cliente client (dni, nombre, pass, direccion,dlat, dlon, this);
-                    bool funciona=clientes.insertar(dni,client,funHash);
+                    clientes.setSelecHash(funHash);
+                    bool funciona=clientes.insertar(dni,client);
                     if (!funciona)
                         std::cout <<"No insertado"<<std::endl;
-                    //else
-                        //std::cout << client.GetDni() << ";" << client.GetNombre() <<std::endl;            
+//                    else
+//                        std::cout << client.GetDni() << ";" << client.GetNombre() <<std::endl;            
                 }              
                 getline(fe, linea);     //Toma una línea del fichero
             }

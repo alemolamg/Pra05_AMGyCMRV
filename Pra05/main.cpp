@@ -16,7 +16,7 @@ int main(){
     setlocale(LC_ALL,"es_ES.UTF8"); 
     srand(time(0));
     try{ 
-         int modo=1; // modo=1-> entrenar; modo=0-> ejecutar normal;
+         int modo=0; // modo=1-> entrenar; modo=0-> ejecutar normal;
          
          if(modo==1){
             //int funHash=0;
@@ -25,11 +25,12 @@ int main(){
             //EcoCityMoto ecoEntrena1("clientes_v2.csv","motos.txt",tam[0]);
             //EcoCityMoto ecoEntrena2("clientes_v2.csv","motos.txt",tam[1]);
              
-            for(int i=0;i<2;i++){ //Cambia el Tamaño  
+            for(int i=0;i<2;i++){ //Cambia el Tamaño
+                cout<<"\n\nCargamos con el numero "<<i<<std::endl;
                 for(int funHash=0;funHash<3;funHash++){ //Recorre las funciones hash
-                    cout<<"Cargamos el archivo con el numero: "<< tam[i] <<std::endl;
-                    EcoCityMoto ecoEntrena("clientes_v2.csv","motos.txt",tam[i],0);
-                    cout<<"Fin del nuemro "<<tam[i]<<"\n\n";
+                    cout<<"\nCargamos el archivo con el numero: "<< tam[i]<<"funHash num: "<<funHash+1 <<std::endl;
+                    EcoCityMoto ecoEntrena("clientes_v2.csv","motos.txt",tam[i],funHash);
+                    //cout<<"Fin del nuemro "<<tam[i]<<"\n\n";
                      
                 }
              }
@@ -74,7 +75,7 @@ int main(){
                     pCli->UltimoItinerario().GetFin().GetLongitud() << std::endl;
             
             //7) mostrar en el display estado moto
-            motoCerCli->darAviso();
+            //motoCerCli->darAviso();
             
             //8) Borrar el cliente
             if(eco.eliminarCliente(clienteA.GetDni()))

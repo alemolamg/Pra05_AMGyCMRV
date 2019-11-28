@@ -45,7 +45,7 @@ private:
     //--------Funciones--------//
     unsigned long calcPrimo(unsigned long& tam);
     unsigned long calcPrimoMenor(unsigned long& primer);
-    unsigned long hash1(unsigned long& clave, int intento,int fun=1); 
+    unsigned long hash1(unsigned long& clave, int intento); 
     
     
     
@@ -67,8 +67,8 @@ public:
     unsigned int numClientes();
     bool esprimo(unsigned long& n);
     
-    bool insertar(const std::string& dni,Cliente& cli,int funHash=1);
-    bool buscar (string &dni, Cliente* &cli,int funHash=1);
+    bool insertar(const std::string& dni,Cliente& cli);
+    bool buscar (string &dni, Cliente* &cli);
     bool borrar(std::string& dni);
     
     
@@ -80,6 +80,8 @@ public:
     unsigned int tamaTabla();
     vector<string> getVectorDNI();
     void setTamLogico(unsigned long tamLogico);
+    void setSelecHash(int selecHash);
+    //int getSelecHash() const;
     
 
 };

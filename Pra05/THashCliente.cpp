@@ -63,8 +63,8 @@ unsigned int THashCliente::maxColisiones(){
     return maxCol;
 }
 
-unsigned long THashCliente::hash1(unsigned long& clave, int intento,int fun) {
-    
+unsigned long THashCliente::hash1(unsigned long& clave, int intento) {
+    int fun=selecHash;
     unsigned long hashGen;//,nuevoPrimo=calcPrimoMenor(primo);
     switch(fun){
         case 0:     //dispersion doble
@@ -98,14 +98,14 @@ unsigned long THashCliente::calcPrimoMenor(unsigned long& primer) {
     return elPrimo;
 }
 
-bool THashCliente::insertar(const std::string& dni, Cliente &cli,int funHash) {
+bool THashCliente::insertar(const std::string& dni, Cliente &cli) {
     unsigned int intento=0,y=0;
     bool encontrado=false;
     unsigned long clave=djb2((unsigned char*)dni.c_str());
     
     while (!encontrado && intento<tamFisico) {
         
-            y=hash1(clave,intento,funHash); 
+            y=hash1(clave,intento); 
             //std::cout<<"calculada posición: "<<y<<std::endl;
         
             if (tabla[y].marca==VACIA || tabla[y].marca==DISPONIBLE) {                
@@ -125,13 +125,13 @@ bool THashCliente::insertar(const std::string& dni, Cliente &cli,int funHash) {
     return encontrado;
 }
 
-bool THashCliente::buscar(string& dni, Cliente* &cli,int funHash) {
+bool THashCliente::buscar(string& dni, Cliente* &cli) {
     bool encontrado=false;
     unsigned long intento=0;
     unsigned long y=0, clave = djb2((unsigned char*)dni.c_str());
     
     while (!encontrado){
-        y=hash1(clave,intento,funHash);
+        y=hash1(clave,intento);
         
         if(tabla[y].marca==VACIA){
             //cli=nullptr;
@@ -231,6 +231,11 @@ vector<string> THashCliente::getVectorDNI() {
 void THashCliente::setTamLogico(unsigned long tamLogico) {
     this->tamLogico = tamLogico;
 }
+
+void THashCliente::setSelecHash(int selecHash) {
+    this->selecHash = selecHash;
+}
+
 
 bool THashCliente::borrar(std::string& dni) {
     unsigned long clave=djb2((unsigned char*)dni.c_str());
