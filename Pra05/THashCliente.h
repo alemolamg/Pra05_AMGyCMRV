@@ -39,6 +39,7 @@ private:
     unsigned long totalColisiones;
     unsigned long maxCol;
     unsigned long primo;// Primo usado para la tabla=tam
+    int selecHash=1;
     std::vector<Entrada> tabla;
     
     //--------Funciones--------//
@@ -66,8 +67,8 @@ public:
     unsigned int numClientes();
     bool esprimo(unsigned long& n);
     
-    bool insertar(const std::string& dni,Cliente& cli);
-    bool buscar (string &dni, Cliente* &cli);
+    bool insertar(const std::string& dni,Cliente& cli,int funHash=1);
+    bool buscar (string &dni, Cliente* &cli,int funHash=1);
     bool borrar(std::string& dni);
     
     
