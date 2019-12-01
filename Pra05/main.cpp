@@ -76,7 +76,9 @@ int main(){
                     pCli->UltimoItinerario().GetFin().GetLongitud() << std::endl;
             
             //7) mostrar en el display estado moto
-            motoCerCli->darAviso();
+            //motoCerCli->darAviso();
+            /// La función Moto::darAviso se ejecuta internamente en el Cliente::terminarTrayecto, 
+            /// asi no hace falta mostrarlo desde el main, porque el cliente ya no tiene la moto
             
             //8) Borrar el cliente
             if(eco.eliminarCliente(clienteA.GetDni()))

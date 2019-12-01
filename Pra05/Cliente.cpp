@@ -161,8 +161,10 @@ void Cliente::crearItinerario(int num, int idUltimo, UTM min, UTM max) {
         int minutos= (f2.verHora()*60 + f2.verMin())- (f1.verHora()*60 + f1.verMin()); 
         i->SetMinutos(minutos);
         
-
-         i->GetVehiculo()->seDesactiva(); //bloquea la moto y la desvincula del cliente
+        /*i->GetVehiculo()->setStatus(0);
+        i->GetVehiculo()->darAviso();*/
+        
+        i->GetVehiculo()->seDesactiva(); //bloquea la moto y la desvincula del cliente
 
  }
  
@@ -189,7 +191,7 @@ void Cliente::setRutas(list<Itinerario> rutaNueva) {
 }
 
 void Cliente::mostrarMensaje(string texto){
-    display=" ";
+    //display=" ";
     display=texto;
     std::cout<<display<<std::endl;
 };

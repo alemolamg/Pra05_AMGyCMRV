@@ -46,10 +46,12 @@ Moto& Moto::operator=(const Moto& orig) {
 void Moto::seActiva(Cliente *cli){
     usadoPor=cli;
     status = Activo;
+    darAviso();
 }
 void Moto::seDesactiva(){
-    usadoPor=0;
     status=Bloqueado;
+    this->darAviso();
+    usadoPor=0;
 }
 
 UTM Moto::getPosicion() const {
