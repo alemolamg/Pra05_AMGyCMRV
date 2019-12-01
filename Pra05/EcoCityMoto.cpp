@@ -358,7 +358,6 @@ bool EcoCityMoto::nuevoCliente(Cliente& nuevoCli) {
 }
 
 bool EcoCityMoto::eliminarCliente(std::string borrameid) {
-    //return clientes.erase(borrameid);
     return clientes.borrar(borrameid);
     
 }

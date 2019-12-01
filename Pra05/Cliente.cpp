@@ -189,6 +189,7 @@ void Cliente::setRutas(list<Itinerario> rutaNueva) {
 }
 
 void Cliente::mostrarMensaje(string texto){
+    display=" ";
     display=texto;
     std::cout<<display<<std::endl;
 };

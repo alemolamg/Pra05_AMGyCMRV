@@ -10,17 +10,17 @@
 #include "THashCliente.h"
 
 THashCliente::THashCliente(unsigned long tamTabla):
-    tamFisico(THashCliente::calcPrimo(tamTabla)),tamLogico(0),totalColisiones(0),
+    tamFisico(THashCliente::calcPrimo(tamTabla)),tamLogico(0),totalColisiones(0),selecHash(1),
     maxCol(0),tabla(tamFisico,Entrada()){
     
-    primo=calcPrimo(tamTabla);
+    primo=calcPrimoMenor(tamTabla);
     
     
 }
 
 THashCliente::THashCliente(const THashCliente& orig):
     tamFisico(orig.tamFisico), tamLogico(orig.tamLogico),totalColisiones(orig.totalColisiones),
-    maxCol(orig.maxCol),primo(orig.primo) ,tabla(orig.tabla){}
+    maxCol(orig.maxCol),primo(orig.primo),selecHash(orig.selecHash) ,tabla(orig.tabla){}
 
 THashCliente::~THashCliente() {
 }
@@ -67,14 +67,14 @@ unsigned long THashCliente::hash1(unsigned long& clave, int intento) {
     int fun=selecHash;
     unsigned long hashGen;//,nuevoPrimo=calcPrimoMenor(primo);
     switch(fun){
-        case 0:     //dispersion doble
+        case 0:     //dispersion doble OK
             hashGen=((clave%tamFisico)+ (intento*(clave%primo)))%tamFisico;
             return hashGen;
             break;
         case 1:     //dispersión cuadrática OK
             hashGen= (clave+(intento*intento)) % tamFisico;
             break;
-        case 2:     //dispersion doble
+        case 2:     //dispersion doble OK  //ESTA ES LA BUENA
             unsigned long modulo = clave % tamFisico;     
             hashGen = (modulo + (intento* (primo-(clave % (primo))))) % tamFisico;
             break;
@@ -158,12 +158,13 @@ float THashCliente::factorCarga() {
 void THashCliente::redispersar() {
     
     if(! (factorCarga()<0.60 || factorCarga()>0.70 )){
-        std::cout<<"No hace falta redispersar"<<std::endl;
-        
+        std::cout<<"No hace falta redispersar"<<std::endl; 
     }else{
     
     tamFisico=calcPrimo(tamLogico);
-    primo=tamFisico;
+    //primo=tamFisico;
+    if(primo>=tamFisico)
+        primo=calcPrimoMenor(tamFisico);
     vector<Entrada> nueva(tamFisico,Entrada());
     unsigned long numClientes=0;
     
@@ -194,7 +195,11 @@ void THashCliente::redispersar() {
     }
     tabla=nueva;
     tamLogico=numClientes; //ToDo: Cambiar por tamTabla
+    
     cout<<"Nueva tabla terminada"<<endl;
+    }
+    if(factorCarga()<0.60 || factorCarga()>0.70 ){
+        redispersar();
     }
 }
 
@@ -241,13 +246,14 @@ bool THashCliente::borrar(std::string& dni) {
     unsigned long clave=djb2((unsigned char*)dni.c_str());
     Cliente *cli;
     bool existe=buscar(dni,cli);
-    unsigned long y=0,intento=0;
+    unsigned long y,intento=0;
     
     while(existe){
-        unsigned long y=hash1(clave,intento);
+        y=hash1(clave,intento);
         
         if(tabla[y].marca==VACIA || tabla[y].marca==DISPONIBLE){// No deberia entrar
             cli=nullptr;
+            return false;
         }else                
             if(tabla[y].marca==OCUPADA && tabla[y].dni==dni){
                 cli=&(tabla[y].cliDatos);
@@ -256,12 +262,16 @@ bool THashCliente::borrar(std::string& dni) {
             }else
                 ++intento;
     }
+    
     //return !existe;
     //lo siente es para comprobar que funciona
     existe=buscar(dni,cli);
     if (existe)
         throw invalid_argument ("THashCliente::borrar: no borrado correctamente");
-    else
-        return true;
+    else{
+        --tamLogico;
+       return true; 
+    }
+        
 }
 

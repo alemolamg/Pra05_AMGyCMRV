@@ -83,9 +83,9 @@ void Moto::setPosicion(UTM posicion) {
 
 void Moto::darAviso(){
     switch(status){
-        case 0: usadoPor->mostrarMensaje("Sinbateria");break;
+        case 0: usadoPor->mostrarMensaje("Bloqueada");break;
         case 1: usadoPor->mostrarMensaje("Activada");break;
-        case 2: usadoPor->mostrarMensaje("Bloqueada");break;
+        case 2: usadoPor->mostrarMensaje("SinBateria");break;
         case 3: usadoPor->mostrarMensaje("Rota");break;
                
     }
