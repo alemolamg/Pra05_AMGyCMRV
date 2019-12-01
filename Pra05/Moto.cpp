@@ -46,10 +46,12 @@ Moto& Moto::operator=(const Moto& orig) {
 void Moto::seActiva(Cliente *cli){
     usadoPor=cli;
     status = Activo;
+    darAviso();
 }
 void Moto::seDesactiva(){
-    usadoPor=0;
     status=Bloqueado;
+    this->darAviso();
+    usadoPor=0;
 }
 
 UTM Moto::getPosicion() const {
@@ -83,9 +85,9 @@ void Moto::setPosicion(UTM posicion) {
 
 void Moto::darAviso(){
     switch(status){
-        case 0: usadoPor->mostrarMensaje("Sinbateria");break;
+        case 0: usadoPor->mostrarMensaje("Bloqueada");break;
         case 1: usadoPor->mostrarMensaje("Activada");break;
-        case 2: usadoPor->mostrarMensaje("Bloqueada");break;
+        case 2: usadoPor->mostrarMensaje("SinBateria");break;
         case 3: usadoPor->mostrarMensaje("Rota");break;
                
     }
