@@ -381,7 +381,7 @@ void EcoCityMoto::borraTodosLosClientes(unsigned long borraTodosEstos){
     vector<string> vectorDeClientes=getVecDNICli();
     unsigned long cliBorrados=0;
     for(cliBorrados=0;cliBorrados<borraTodosEstos;cliBorrados++){
-        clientes.borrar(vectorDeClientes[cliBorrados]);
+        clientes.borrar(vectorDeClientes[cliBorrados]); //ToDo: mandar un dni
     }
     clientes.setTamLogico(clientes.numClientes()-cliBorrados);
     cout<<"Todos los clientes han sido eliminados, "<<

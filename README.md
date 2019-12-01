@@ -7,8 +7,8 @@ Ver 5.0,5.1: Añade la práctica 4 y corrige pequeños errores.
 Trabajando en la Versión 5.2 y 5.3: Creación clase THashCliente.
 
 Versión 5.5, y 5.6: Ajustando EcoCityMoto para la nueva versión
+versión 5.7 o superior: ajustando pequeños detalles:
+ -Versión 5.9 perfila errores a la hora de guardar los ficheros
 
-Tabajando en versión 5.7 o superior: ajustando pequeños detalles
 
-Versión 5.9 perfila errores a la hora de guardar los ficheros
-
+Tabajando en Versión 5.10: ajustamos el programa para la entrega tardia. Fecha: 5-12-2019

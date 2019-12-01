@@ -34,7 +34,7 @@ int main(){
                      
                 }
              }
-            cout <<"TERMINADO ENTRENAMIENTO\n"<<std::endl;
+            cout <<"\nTERMINADO ENTRENAMIENTO\n"<<std::endl;
              
              
          }else{
