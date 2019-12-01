@@ -6,13 +6,14 @@
 #include <cstdlib>
 #include <algorithm>
 #include <ctime>
+#include <csetjmp>
 #include "Cliente.h"
 #include "Moto.h"
 #include "EcoCityMoto.h"
 
 int main(){    
     unsigned long primo,numero=10000;
-        
+      
     setlocale(LC_ALL,"es_ES.UTF8"); 
     srand(time(0));
     try{ 
@@ -20,15 +21,15 @@ int main(){
          
          if(modo==1){
             //int funHash=0;
-            int tam[]={16890,16230};
+            unsigned long tam[]={numero,numero};
             //cout<<"Cargamos el archivo con el numero: "<<  <<std::endl;
             //EcoCityMoto ecoEntrena1("clientes_v2.csv","motos.txt",tam[0]);
             //EcoCityMoto ecoEntrena2("clientes_v2.csv","motos.txt",tam[1]);
              
             for(int i=0;i<2;i++){ //Cambia el Tamaño
-                cout<<"\n\nCargamos con el numero "<<i<<std::endl;
+                cout<<"\n\nCargamos con el numero "<<tam[i]<<std::endl;
                 for(int funHash=0;funHash<3;funHash++){ //Recorre las funciones hash
-                    cout<<"\nCargamos el archivo con el numero: "<< tam[i]<<"funHash num: "<<funHash+1 <<std::endl;
+                    cout<<"\nCargamos el archivo con el numero: "<< tam[i]<<" funHash num: "<<funHash+1 <<std::endl;
                     EcoCityMoto ecoEntrena("clientes_v2.csv","motos.txt",tam[i],funHash);
                     //cout<<"Fin del nuemro "<<tam[i]<<"\n\n";
                      
@@ -65,7 +66,7 @@ int main(){
             //6)Realizar un itinerario con la moto localizada con duración válida para la carga de batería de la moto
             std::cout << "Comienza Ruta n: " << eco.GetIdUltimo() << std::endl;
             pCli->desbloquearMoto(motoCerCli);
-            //motoCerCli->darAviso(); //esto es de la parte 7;
+            motoCerCli->darAviso(); //esto es de la parte 7;
             std::cout << "Desbloqueamos la Moto: " << motoCerCli->getId() << std::endl;
             pCli->terminarTrayecto();
             std::cout << "Fin de la Ruta: " << pCli->UltimoItinerario().GetFecha().cadena() <<
@@ -76,6 +77,8 @@ int main(){
             
             //7) mostrar en el display estado moto
             //motoCerCli->darAviso();
+            /// La función Moto::darAviso se ejecuta internamente en el Cliente::terminarTrayecto, 
+            /// asi no hace falta mostrarlo desde el main, porque el cliente ya no tiene la moto
             
             //8) Borrar el cliente
             if(eco.eliminarCliente(clienteA.GetDni()))
