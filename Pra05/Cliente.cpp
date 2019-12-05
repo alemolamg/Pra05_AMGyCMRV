@@ -114,14 +114,12 @@ void Cliente::crearItinerario(int num, int idUltimo, UTM min, UTM max) {
         Itinerario it2(idUltimo,posicion,finNuevo,fecha,minNuevo,m);
         m->setPosicion(finNuevo);
         rutas.push_back(it2);
-        
-        //std::cout<<"Mat moto:" << (m->getId()) <<" pos moto:"<< (m->getPosicion().latitud)<<m->getPosicion().longitud << std::endl;
-         
+           
     } 
     
     for(int i=0;i<num;i++){
         motosVector[i]->seDesactiva();
-        //cout<<"Moto "<<i<<" Desactivada \n";
+        
     }
 };
 
@@ -174,8 +172,7 @@ void Cliente::crearItinerario(int num, int idUltimo, UTM min, UTM max) {
  Itinerario& Cliente::UltimoItinerario() {
      list<Itinerario>::iterator i=rutas.end();
      return *--i;
-     //return *rutas.rbegin();
-     //return (rutas.end())-1; 
+     
 }
  
 void Cliente::cargaItinerario(const Itinerario& iti) {
@@ -191,7 +188,6 @@ void Cliente::setRutas(list<Itinerario> rutaNueva) {
 }
 
 void Cliente::mostrarMensaje(string texto){
-    //display=" ";
     display=texto;
     std::cout<<display<<std::endl;
 };
