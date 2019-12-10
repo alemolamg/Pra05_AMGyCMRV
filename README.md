@@ -1,5 +1,5 @@
-# Pra05_AMGyCMRV
-Practica 05 Estructuras de Datos hecha por Cayetano y Alemol
+# Pra05_AMGyCMRV 
+Practica 05 Estructuras de Datos hecha por Cayetano y Alemol. Practica terminada
 entrega practica el jueves 28 de noviembre
 
 
@@ -11,4 +11,4 @@ versión 5.7 o superior: ajustando pequeños detalles:
  -Versión 5.9 perfila errores a la hora de guardar los ficheros
 
 
-Tabajando en Versión 5.10: ajustamos el programa para la entrega tardia. Fecha: 5-12-2019
+Versión 5.10: ajustamos el programa para la entrega tardia. Fecha: 5-12-2019
